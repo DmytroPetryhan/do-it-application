@@ -13,7 +13,7 @@ export default function TitleAppScreen() {
       </View>
 
       <View>
-        <Text style={styles.versionText}>v 1.0.0</Text>
+        <Text style={styles.versionText}>v 1.0.</Text>
       </View>
     </GradientView>
   );
