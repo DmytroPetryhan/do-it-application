@@ -1,7 +1,7 @@
 import React from "react";
-import { StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { THEME } from "../theme";
+import styles from "./GradientContainerStyles";
 
 const GradientContinaer = ({ children, style }) => {
   return (
@@ -15,9 +15,5 @@ const GradientContinaer = ({ children, style }) => {
     </LinearGradient>
   );
 };
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
+
 export default GradientContinaer;
