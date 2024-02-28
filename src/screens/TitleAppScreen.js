@@ -1,9 +1,8 @@
 import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
-import GradientView from "../components/GradientView";
-import checkmark from "../img/Checkmark.png";
+import checkmark from "../img/tittleAppScreenImage/Checkmark.png";
 import { THEME } from "../theme";
-import GradientContinaer from "../components/GradientView";
+import GradientContinaer from "../components/GradientContainer/index";
 
 export default function TitleAppScreen() {
   return (
@@ -14,7 +13,7 @@ export default function TitleAppScreen() {
       </View>
 
       <View>
-        <Text style={styles.versionText}>v 1.0.</Text>
+        <Text style={styles.versionText}>v 1.0.0</Text>
       </View>
     </GradientContinaer>
   );

@@ -1,9 +1,9 @@
 import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
-import { THEME } from "../theme";
+import { THEME } from "../../theme";
 import styles from "./GradientContainerStyles";
 
-const GradientContinaer = ({ children, style }) => {
+const GradientContainer = ({ children, style }) => {
   return (
     <LinearGradient
       style={{ ...styles.container, ...style }}
@@ -16,4 +16,4 @@ const GradientContinaer = ({ children, style }) => {
   );
 };
 
-export default GradientContinaer;
+export default GradientContainer;
