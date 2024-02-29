@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
-import checkmark from "../img/tittleAppScreenImage/Checkmark.png";
+import checkmark from "../img/titleAppScreenImage/Checkmark.png";
 import { THEME } from "../theme";
 import GradientContinaer from "../components/GradientContainer/index";
 
@@ -31,10 +31,10 @@ const styles = StyleSheet.create({
     margin: 25,
     fontSize: 36,
     fontWeight: "bold",
-    color: THEME.MAIN_TEXT_COLOR,
+    color: THEME.WHITE_TEXT_COLOR,
   },
   versionText: {
     fontSize: 20,
-    color: THEME.MAIN_TEXT_COLOR,
+    color: THEME.WHITE_TEXT_COLOR,
   },
 });
