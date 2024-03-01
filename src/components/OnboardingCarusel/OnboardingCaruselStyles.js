@@ -1,7 +1,7 @@
 import { StyleSheet, Dimensions } from "react-native";
 import { THEME } from "../../theme";
 
-const width = Dimensions.get("window").width;
+const { width } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   container: {
@@ -12,6 +12,8 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   imageWrap: {
+    width,
+    alignItems: "center",
     justifyContent: "center",
     height: "60%",
   },

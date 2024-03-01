@@ -14,7 +14,7 @@ const OnboardingScreen = () => {
   const viewableItemsChanged = useRef(({ viewableItems }) => {
     setCurrentIndex(viewableItems[0].index);
   }).current;
-  const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
+  const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 40 }).current;
   const flatRef = useRef();
 
   const icon =
