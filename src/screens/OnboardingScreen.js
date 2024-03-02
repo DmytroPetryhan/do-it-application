@@ -7,15 +7,16 @@ import Paginator from "../components/Paginator/index";
 import OnboardButton from "../components/OnboardButton/index";
 import { AntDesign } from "@expo/vector-icons";
 const { height, width } = Dimensions.get("window");
-const swipeLength = onboardingData.length - 1;
 
 const OnboardingScreen = () => {
+  const swipeLength = onboardingData.length - 1;
   const [currentIndex, setCurrentIndex] = useState(0);
-  const viewableItemsChanged = useRef(({ viewableItems }) => {
-    setCurrentIndex(viewableItems[0].index);
-  }).current;
-  const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 40 }).current;
-  const flatRef = useRef();
+  const flatListRef = useRef();
+
+  const viewableItemsChanged = ({ viewableItems }) => {
+    const index = viewableItems[0].index;
+    setCurrentIndex(index);
+  };
 
   const icon =
     currentIndex !== swipeLength ? (
@@ -26,7 +27,7 @@ const OnboardingScreen = () => {
 
   const buttonHandler = () => {
     if (currentIndex < swipeLength) {
-      flatRef.current.scrollToIndex({ index: currentIndex + 1 });
+      flatListRef.current.scrollToIndex({ index: currentIndex + 1 });
     } else {
       return;
     }
@@ -35,7 +36,7 @@ const OnboardingScreen = () => {
   return (
     <GradientContainer style={styles.container}>
       <FlatList
-        ref={flatRef}
+        ref={flatListRef}
         data={onboardingData}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
@@ -47,7 +48,9 @@ const OnboardingScreen = () => {
         showsHorizontalScrollIndicator={false}
         scrollEventThrottle={32}
         onViewableItemsChanged={viewableItemsChanged}
-        viewabilityConfig={viewConfig}
+        viewabilityConfig={{
+          itemVisiblePercentThreshold: 50,
+        }}
       />
       <View style={styles.bottomContainer}>
         <Paginator data={onboardingData} caruselIndex={currentIndex} />
