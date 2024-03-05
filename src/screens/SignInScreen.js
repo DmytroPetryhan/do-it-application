@@ -9,18 +9,23 @@ const SignInScreen = () => {
   return (
     <View style={styles.container}>
       <WelcomeMessage />
-      <Input title={"E - mail"} image={"mail"} keyboardType={"email-address"} />
-      <Input
-        title={"Password"}
-        image={"lock-closed"}
-        keyboardType={"default"}
-      />
-
+      <View style={styles.inputContainer}>
+        <Input
+          title={"E - mail"}
+          image={"mail"}
+          keyboardType={"email-address"}
+        />
+        <Input
+          title={"Password"}
+          image={"lock-closed"}
+          keyboardType={"default"}
+        />
+      </View>
       <NavigationButton
         style={{
           borderBottomWidth: 0.5,
           borderBottomColor: THEME.WHITE_COLOR,
-          marginVertical: 35,
+          marginVertical: 30,
         }}
         title={"forget password?"}
         textColor={THEME.WHITE_TEXT_COLOR}
@@ -52,6 +57,11 @@ const styles = StyleSheet.create({
   btnTitle: {
     color: THEME.WHITE_TEXT_COLOR,
     letterSpacing: 1.5,
+  },
+  inputContainer: {
+    marginTop: 40,
+    height: 150,
+    justifyContent: "space-between",
   },
 });
 
