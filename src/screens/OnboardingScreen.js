@@ -1,10 +1,9 @@
 import React, { useState, useRef } from "react";
 import { StyleSheet, FlatList, View, Dimensions } from "react-native";
 import { onboardingData } from "../data/onboardingData";
-import GradientContainer from "../components/GradientContainer/index";
-import OnboardingCarusel from "../components/OnboardingCarusel/index";
-import Paginator from "../components/Paginator/index";
-import OnboardButton from "../components/OnboardButton/index";
+import OnboardingCarusel from "../components/OnboardingCarusel";
+import Paginator from "../components/Paginator";
+import OnboardButton from "../components/OnboardButton";
 import { AntDesign } from "@expo/vector-icons";
 const { height, width } = Dimensions.get("window");
 
@@ -34,7 +33,7 @@ const OnboardingScreen = () => {
   };
 
   return (
-    <GradientContainer style={styles.container}>
+    <View style={styles.container}>
       <FlatList
         ref={flatListRef}
         data={onboardingData}
@@ -56,12 +55,13 @@ const OnboardingScreen = () => {
         <Paginator data={onboardingData} caruselIndex={currentIndex} />
         <OnboardButton onPress={buttonHandler}>{icon}</OnboardButton>
       </View>
-    </GradientContainer>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     alignItems: "flex-end",
   },
   bottomContainer: {
