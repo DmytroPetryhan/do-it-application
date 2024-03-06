@@ -29,12 +29,14 @@ const styles = StyleSheet.create({
   },
   titleText: {
     margin: 25,
+    fontFamily: "darumadrop-one",
     fontSize: 36,
     fontWeight: "bold",
     color: THEME.WHITE_TEXT_COLOR,
   },
   versionText: {
     fontSize: 20,
+    fontFamily: "poppins-regular",
     color: THEME.WHITE_TEXT_COLOR,
   },
 });

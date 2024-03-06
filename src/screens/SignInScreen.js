@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   btnTitle: {
+    fontFamily: "poppins-regular",
     color: THEME.WHITE_TEXT_COLOR,
     letterSpacing: 1.5,
   },

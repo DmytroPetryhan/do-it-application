@@ -20,11 +20,12 @@ const styles = StyleSheet.create({
   titleWrap: {
     height: "20%",
     justifyContent: "flex-start",
-    paddingHorizontal: 70,
+    paddingHorizontal: 60,
   },
   textStyle: {
     textAlign: "center",
     fontSize: 20,
+    fontFamily: "poppins-regular",
     color: THEME.WHITE_COLOR,
   },
 });

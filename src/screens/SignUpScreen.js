@@ -53,8 +53,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   btnTitle: {
-    color: THEME.WHITE_TEXT_COLOR,
     letterSpacing: 1.5,
+    fontFamily: "poppins-regular",
+    color: THEME.WHITE_TEXT_COLOR,
   },
   formContainer: {
     width: "100%",
