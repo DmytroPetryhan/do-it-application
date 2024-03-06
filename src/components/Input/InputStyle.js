@@ -7,7 +7,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     height: 45,
     width: "100%",
-    //marginTop: 50,
     flexDirection: "row",
     backgroundColor: "#FFFFFF",
     borderRadius: 5,
@@ -17,6 +16,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     flex: 1,
     fontSize: 20,
+    fontFamily: "poppins-regular",
     marginLeft: 10,
   },
 });

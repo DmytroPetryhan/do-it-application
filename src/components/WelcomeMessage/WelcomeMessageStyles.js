@@ -18,21 +18,21 @@ const styles = StyleSheet.create({
   },
   welcomeMessage: {
     paddingTop: 5,
-    color: THEME.WHITE_TEXT_COLOR,
     fontSize: 25,
-    fontWeight: "600",
+    fontFamily: "poppins-regular",
+    color: THEME.WHITE_TEXT_COLOR,
     letterSpacing: 1,
   },
   titleMessage: {
-    fontWeight: "900",
-    fontSize: 21,
+    fontSize: 27,
     letterSpacing: 1,
+    fontFamily: "darumadrop-one",
   },
   reminderMessage: {
     paddingTop: 5,
-    fontWeight: "600",
     fontSize: 18,
     letterSpacing: 1,
+    fontFamily: "poppins-regular",
     color: THEME.WHITE_TEXT_COLOR,
   },
 });

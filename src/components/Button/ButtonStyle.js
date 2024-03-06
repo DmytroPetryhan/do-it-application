@@ -11,9 +11,9 @@ const styles = StyleSheet.create({
   },
   titleButton: {
     fontSize: 18,
+    fontFamily: "poppins-regular",
     color: THEME.WHITE_TEXT_COLOR,
     letterSpacing: 1,
-    fontWeight: "600",
   },
 });
 
