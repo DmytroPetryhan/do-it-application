@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, SafeAreaView } from "react-native";
 import React from "react";
 import WelcomeMessage from "../components/WelcomeMessage";
 import Input from "../components/Input";
@@ -8,36 +8,38 @@ import { THEME } from "../theme";
 
 const SignUpScreen = () => {
   return (
-    <View style={styles.container}>
-      <WelcomeMessage />
-      <View style={styles.formContainer}>
-        <Input
-          title={"Full Name"}
-          image={"person-sharp"}
-          keyboardType={"default"}
-        />
+    <SafeAreaView>
+      <View style={styles.container}>
+        <WelcomeMessage />
+        <View style={styles.formContainer}>
+          <Input
+            title={"Full Name"}
+            image={"person-sharp"}
+            keyboardType={"default"}
+          />
 
-        <Input
-          title={"E - mail"}
-          image={"mail"}
-          keyboardType={"email-address"}
-        />
-        <Input
-          title={"Password"}
-          image={"lock-closed"}
-          keyboardType={"default"}
-        />
+          <Input
+            title={"E - mail"}
+            image={"mail"}
+            keyboardType={"email-address"}
+          />
+          <Input
+            title={"Password"}
+            image={"lock-closed"}
+            keyboardType={"default"}
+          />
 
-        <Button title={"sign up"} />
+          <Button title={"sign up"} />
+        </View>
+        <View style={styles.signIn}>
+          <Text style={styles.btnTitle}>Already have an account? </Text>
+          <NavigationButton
+            title={"sign in"}
+            textColor={THEME.SIGN_UP_IN_COLOR}
+          />
+        </View>
       </View>
-      <View style={styles.signIn}>
-        <Text style={styles.btnTitle}>Already have an account? </Text>
-        <NavigationButton
-          title={"sign in"}
-          textColor={THEME.SIGN_UP_IN_COLOR}
-        />
-      </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
