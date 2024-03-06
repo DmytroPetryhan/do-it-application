@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from "react";
 import { StyleSheet, Text, View, Image, Animated } from "react-native";
 import checkmark from "../img/titleAppScreenImage/Checkmark.png";
 import { THEME } from "../theme";
+import GradientContainer from "../components/GradientContainer";
 
 export default function TitleAppScreen({ navigation }) {
   const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -26,16 +27,18 @@ export default function TitleAppScreen({ navigation }) {
   };
 
   return (
-    <Animated.View style={[styles.container, { opacity: fadeAnim }]}>
-      <View style={styles.contentWrap}>
-        <Image source={checkmark}></Image>
-        <Text style={styles.titleText}>DO IT</Text>
-      </View>
+    <GradientContainer>
+      <Animated.View style={[styles.container, { opacity: fadeAnim }]}>
+        <View style={styles.contentWrap}>
+          <Image source={checkmark}></Image>
+          <Text style={styles.titleText}>DO IT</Text>
+        </View>
 
-      <View>
-        <Text style={styles.versionText}>v 1.0.0</Text>
-      </View>
-    </Animated.View>
+        <View>
+          <Text style={styles.versionText}>v 1.0.0</Text>
+        </View>
+      </Animated.View>
+    </GradientContainer>
   );
 }
 

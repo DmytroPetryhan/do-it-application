@@ -5,41 +5,44 @@ import Input from "../components/Input";
 import NavigationButton from "../components/NavigationButton";
 import Button from "../components/Button/Button";
 import { THEME } from "../theme";
+import GradientContainer from "../components/GradientContainer";
 
 const SignUpScreen = () => {
   return (
-    <SafeAreaView>
-      <View style={styles.container}>
-        <WelcomeMessage />
-        <View style={styles.formContainer}>
-          <Input
-            title={"Full Name"}
-            image={"person-sharp"}
-            keyboardType={"default"}
-          />
+    <GradientContainer>
+      <SafeAreaView>
+        <View style={styles.container}>
+          <WelcomeMessage />
+          <View style={styles.formContainer}>
+            <Input
+              title={"Full Name"}
+              image={"person-sharp"}
+              keyboardType={"default"}
+            />
 
-          <Input
-            title={"E - mail"}
-            image={"mail"}
-            keyboardType={"email-address"}
-          />
-          <Input
-            title={"Password"}
-            image={"lock-closed"}
-            keyboardType={"default"}
-          />
+            <Input
+              title={"E - mail"}
+              image={"mail"}
+              keyboardType={"email-address"}
+            />
+            <Input
+              title={"Password"}
+              image={"lock-closed"}
+              keyboardType={"default"}
+            />
 
-          <Button title={"sign up"} />
+            <Button title={"sign up"} />
+          </View>
+          <View style={styles.signIn}>
+            <Text style={styles.btnTitle}>Already have an account? </Text>
+            <NavigationButton
+              title={"sign in"}
+              textColor={THEME.SIGN_UP_IN_COLOR}
+            />
+          </View>
         </View>
-        <View style={styles.signIn}>
-          <Text style={styles.btnTitle}>Already have an account? </Text>
-          <NavigationButton
-            title={"sign in"}
-            textColor={THEME.SIGN_UP_IN_COLOR}
-          />
-        </View>
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
+    </GradientContainer>
   );
 };
 

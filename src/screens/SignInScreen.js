@@ -5,45 +5,48 @@ import Input from "../components/Input";
 import NavigationButton from "../components/NavigationButton";
 import { THEME } from "../theme";
 import Button from "../components/Button/Button";
+import GradientContainer from "../components/GradientContainer";
 
 const SignInScreen = () => {
   return (
-    <SafeAreaView>
-      <View style={styles.container}>
-        <WelcomeMessage />
-        <View style={styles.inputContainer}>
-          <Input
-            title={"E - mail"}
-            image={"mail"}
-            keyboardType={"email-address"}
-          />
-          <Input
-            title={"Password"}
-            image={"lock-closed"}
-            keyboardType={"default"}
-          />
-        </View>
-        <NavigationButton
-          style={{
-            borderBottomWidth: 0.5,
-            borderBottomColor: THEME.WHITE_COLOR,
-            marginVertical: 30,
-          }}
-          title={"forget password?"}
-          textColor={THEME.WHITE_TEXT_COLOR}
-        />
-
-        <Button title={"sign in"} />
-
-        <View style={styles.signUp}>
-          <Text style={styles.btnTitle}>Don’t have an account? </Text>
+    <GradientContainer>
+      <SafeAreaView>
+        <View style={styles.container}>
+          <WelcomeMessage />
+          <View style={styles.inputContainer}>
+            <Input
+              title={"E - mail"}
+              image={"mail"}
+              keyboardType={"email-address"}
+            />
+            <Input
+              title={"Password"}
+              image={"lock-closed"}
+              keyboardType={"default"}
+            />
+          </View>
           <NavigationButton
-            title={"sign up"}
-            textColor={THEME.SIGN_UP_IN_COLOR}
+            style={{
+              borderBottomWidth: 0.5,
+              borderBottomColor: THEME.WHITE_COLOR,
+              marginVertical: 30,
+            }}
+            title={"forget password?"}
+            textColor={THEME.WHITE_TEXT_COLOR}
           />
+
+          <Button title={"sign in"} />
+
+          <View style={styles.signUp}>
+            <Text style={styles.btnTitle}>Don’t have an account? </Text>
+            <NavigationButton
+              title={"sign up"}
+              textColor={THEME.SIGN_UP_IN_COLOR}
+            />
+          </View>
         </View>
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
+    </GradientContainer>
   );
 };
 const styles = StyleSheet.create({

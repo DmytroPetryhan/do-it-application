@@ -5,6 +5,7 @@ import OnboardingCarusel from "../components/OnboardingCarusel";
 import Paginator from "../components/Paginator";
 import OnboardButton from "../components/OnboardButton";
 import { AntDesign } from "@expo/vector-icons";
+import GradientContainer from "../components/GradientContainer";
 const { height, width } = Dimensions.get("window");
 
 const OnboardingScreen = ({ navigation }) => {
@@ -33,7 +34,7 @@ const OnboardingScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <GradientContainer style={styles.container}>
       <FlatList
         ref={flatListRef}
         data={onboardingData}
@@ -55,7 +56,7 @@ const OnboardingScreen = ({ navigation }) => {
         <Paginator data={onboardingData} caruselIndex={currentIndex} />
         <OnboardButton onPress={buttonHandler}>{icon}</OnboardButton>
       </View>
-    </View>
+    </GradientContainer>
   );
 };
 
