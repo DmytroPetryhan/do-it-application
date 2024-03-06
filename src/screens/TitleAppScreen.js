@@ -1,11 +1,32 @@
-import React from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import React, { useRef, useEffect } from "react";
+import { StyleSheet, Text, View, Image, Animated } from "react-native";
 import checkmark from "../img/titleAppScreenImage/Checkmark.png";
 import { THEME } from "../theme";
 
-export default function TitleAppScreen() {
+export default function TitleAppScreen({ navigation }) {
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    fadeIn();
+  }, []);
+
+  const fadeIn = () => {
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 2000,
+      useNativeDriver: true,
+    }).start(fadeOut);
+  };
+  const fadeOut = () => {
+    Animated.timing(fadeAnim, {
+      toValue: 0,
+      duration: 2000,
+      useNativeDriver: true,
+    }).start(() => navigation.navigate("onboardingScreen"));
+  };
+
   return (
-    <View style={styles.container}>
+    <Animated.View style={[styles.container, { opacity: fadeAnim }]}>
       <View style={styles.contentWrap}>
         <Image source={checkmark}></Image>
         <Text style={styles.titleText}>DO IT</Text>
@@ -14,7 +35,7 @@ export default function TitleAppScreen() {
       <View>
         <Text style={styles.versionText}>v 1.0.0</Text>
       </View>
-    </View>
+    </Animated.View>
   );
 }
 

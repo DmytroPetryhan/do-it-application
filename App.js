@@ -1,12 +1,8 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, SafeAreaView, Platform } from "react-native";
-
 import GradientContainer from "./src/components/GradientContainer";
-import TitleAppScreen from "./src/screens/TitleAppScreen";
-import OnboardingScreen from "./src/screens/OnboardingScreen";
-import SignInScreen from "./src/screens/SignInScreen";
-import SignUpScreen from "./src/screens/SignUpScreen";
+import RootNavigation from "./src/navigation/RootNavigation";
 
 export default function App() {
   return (
@@ -14,11 +10,7 @@ export default function App() {
       <SafeAreaView style={styles.androidSafeArea}>
         <StatusBar style="light" />
       </SafeAreaView>
-
-      {/* <OnboardingScreen /> */}
-      {/* <TitleAppScreen /> */}
-      {/* <SignInScreen /> */}
-      <SignUpScreen />
+      <RootNavigation />
     </GradientContainer>
   );
 }
@@ -28,6 +20,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   androidSafeArea: {
-    height: Platform.OS === "android" ? 40 : 0,
+    height: Platform.OS === "ios" ? 0 : 40,
   },
 });
