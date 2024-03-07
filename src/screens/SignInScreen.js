@@ -1,16 +1,45 @@
-import React from "react";
-import { StyleSheet, View, Text, SafeAreaView } from "react-native";
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  View,
+  Text,
+  SafeAreaView,
+  Platform,
+  Alert,
+} from "react-native";
 import WelcomeMessage from "../components/WelcomeMessage";
 import Input from "../components/Input";
 import NavigationButton from "../components/NavigationButton";
 import { THEME } from "../theme";
 import Button from "../components/Button/Button";
 import GradientContainer from "../components/GradientContainer";
+import PasswordInput from "../components/PasswordInput/PasswordInput";
 
-const SignInScreen = () => {
+const SignInScreen = ({ navigation }) => {
+  const [password, setPassword] = useState("123");
+
+  console.log("========================================");
+
+  const navigateToSignUp = () => {
+    navigation.navigate("signUpScreen");
+  };
+  const remindPassword = () => {
+    Alert.alert("Forget password ?", "Please enter a new password !!!", [
+      {
+        text: "Cancel",
+        style: "destructive",
+      },
+      {
+        text: "OK",
+        onPress: () => {
+          alert(`Your password ...`);
+        },
+      },
+    ]);
+  };
   return (
     <GradientContainer>
-      <SafeAreaView>
+      <SafeAreaView style={styles.safeArea}>
         <View style={styles.container}>
           <WelcomeMessage />
           <View style={styles.inputContainer}>
@@ -18,12 +47,9 @@ const SignInScreen = () => {
               title={"E - mail"}
               image={"mail"}
               keyboardType={"email-address"}
+              // onChangeText={setEmail}
             />
-            <Input
-              title={"Password"}
-              image={"lock-closed"}
-              keyboardType={"default"}
-            />
+            <PasswordInput value={password} onChangeText={setPassword} />
           </View>
           <NavigationButton
             style={{
@@ -33,15 +59,23 @@ const SignInScreen = () => {
             }}
             title={"forget password?"}
             textColor={THEME.WHITE_TEXT_COLOR}
+            onPress={remindPassword}
           />
 
-          <Button title={"sign in"} />
+          <Button
+            title={"sign in"}
+            onPres={() => {
+              //console.log("M", mail);
+              console.log("P", password);
+            }}
+          />
 
           <View style={styles.signUp}>
             <Text style={styles.btnTitle}>Don’t have an account? </Text>
             <NavigationButton
               title={"sign up"}
               textColor={THEME.SIGN_UP_IN_COLOR}
+              onPress={navigateToSignUp}
             />
           </View>
         </View>
@@ -53,6 +87,10 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "flex-end",
     padding: 20,
+  },
+  safeArea: {
+    flex: 1,
+    paddingTop: Platform.OS === "android" ? 40 : 0,
   },
   signUp: {
     width: "100%",
