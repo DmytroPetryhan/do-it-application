@@ -6,6 +6,8 @@ import {
   SafeAreaView,
   Platform,
   Alert,
+  Pressable,
+  Keyboard,
 } from "react-native";
 import WelcomeMessage from "../components/WelcomeMessage";
 import Input from "../components/Input";
@@ -16,13 +18,12 @@ import GradientContainer from "../components/GradientContainer";
 import PasswordInput from "../components/PasswordInput/PasswordInput";
 
 const SignInScreen = ({ navigation }) => {
-  const [password, setPassword] = useState("123");
+  const [password, setPassword] = useState("");
 
-  console.log("========================================");
+  const hideKeyboard = () => Keyboard.dismiss();
 
-  const navigateToSignUp = () => {
-    navigation.navigate("signUpScreen");
-  };
+  const navigateToSignUp = () => navigation.navigate("signUpScreen");
+
   const remindPassword = () => {
     Alert.alert("Forget password ?", "Please enter a new password !!!", [
       {
@@ -37,10 +38,11 @@ const SignInScreen = ({ navigation }) => {
       },
     ]);
   };
+
   return (
     <GradientContainer>
       <SafeAreaView style={styles.safeArea}>
-        <View style={styles.container}>
+        <Pressable style={styles.container} onPress={hideKeyboard}>
           <WelcomeMessage />
           <View style={styles.inputContainer}>
             <Input
@@ -49,8 +51,10 @@ const SignInScreen = ({ navigation }) => {
               keyboardType={"email-address"}
               // onChangeText={setEmail}
             />
+
             <PasswordInput value={password} onChangeText={setPassword} />
           </View>
+
           <NavigationButton
             style={{
               borderBottomWidth: 0.5,
@@ -78,7 +82,7 @@ const SignInScreen = ({ navigation }) => {
               onPress={navigateToSignUp}
             />
           </View>
-        </View>
+        </Pressable>
       </SafeAreaView>
     </GradientContainer>
   );
