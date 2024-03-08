@@ -1,33 +1,34 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, SafeAreaView, Platform } from "react-native";
+import * as SplashScreen from "expo-splash-screen";
+import { useFonts } from "expo-font";
+import RootNavigation from "./src/navigation/RootNavigation";
 
-import GradientContainer from "./src/components/GradientContainer";
-import TitleAppScreen from "./src/screens/TitleAppScreen";
-import OnboardingScreen from "./src/screens/OnboardingScreen";
+import { View } from "react-native";
 import SignInScreen from "./src/screens/SignInScreen";
-import SignUpScreen from "./src/screens/SignUpScreen";
+
+SplashScreen.preventAutoHideAsync();
 
 export default function App() {
-  return (
-    <GradientContainer style={styles.container}>
-      <SafeAreaView style={styles.androidSafeArea}>
-        <StatusBar style="light" />
-      </SafeAreaView>
+  const [fontsLoaded, fontError] = useFonts({
+    "darumadrop-one": require("./assets/fonts/DarumadropOne-Regular.ttf"),
+    "poppins-regular": require("./assets/fonts/Poppins-Regular.ttf"),
+  });
 
-      {/* <OnboardingScreen /> */}
-      {/* <TitleAppScreen /> */}
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded || fontError) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded, fontError]);
+
+  if (!fontsLoaded && !fontError) {
+    return null;
+  }
+  return (
+    <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
+      <StatusBar style="light" />
       {/* <SignInScreen /> */}
-      <SignUpScreen />
-    </GradientContainer>
+      <RootNavigation />
+    </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  androidSafeArea: {
-    height: Platform.OS === "android" ? 40 : 0,
-  },
-});

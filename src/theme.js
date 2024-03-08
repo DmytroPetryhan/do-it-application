@@ -6,4 +6,5 @@ export const THEME = {
   WHITE_COLOR: "#FFFFFF",
   BUTTON_COLOR: "#0EA5E9",
   SIGN_UP_IN_COLOR: "#63D9F3",
+  WARNING_RED_COLOR: "#ff0f0f",
 };

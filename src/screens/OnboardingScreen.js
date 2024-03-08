@@ -5,9 +5,10 @@ import OnboardingCarusel from "../components/OnboardingCarusel";
 import Paginator from "../components/Paginator";
 import OnboardButton from "../components/OnboardButton";
 import { AntDesign } from "@expo/vector-icons";
+import GradientContainer from "../components/GradientContainer";
 const { height, width } = Dimensions.get("window");
 
-const OnboardingScreen = () => {
+const OnboardingScreen = ({ navigation }) => {
   const swipeLength = onboardingData.length - 1;
   const [currentIndex, setCurrentIndex] = useState(0);
   const flatListRef = useRef();
@@ -28,12 +29,12 @@ const OnboardingScreen = () => {
     if (currentIndex < swipeLength) {
       flatListRef.current.scrollToIndex({ index: currentIndex + 1 });
     } else {
-      return;
+      navigation.navigate("signInScreen");
     }
   };
 
   return (
-    <View style={styles.container}>
+    <GradientContainer style={styles.container}>
       <FlatList
         ref={flatListRef}
         data={onboardingData}
@@ -55,7 +56,7 @@ const OnboardingScreen = () => {
         <Paginator data={onboardingData} caruselIndex={currentIndex} />
         <OnboardButton onPress={buttonHandler}>{icon}</OnboardButton>
       </View>
-    </View>
+    </GradientContainer>
   );
 };
 
