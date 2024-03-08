@@ -27,8 +27,8 @@ export default function App() {
   return (
     <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
       <StatusBar style="light" />
-      <SignInScreen />
-      {/* <RootNavigation /> */}
+      {/* <SignInScreen /> */}
+      <RootNavigation />
     </View>
   );
 }

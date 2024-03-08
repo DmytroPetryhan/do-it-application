@@ -19,6 +19,7 @@ import PasswordInput from "../components/PasswordInput/PasswordInput";
 
 const SignInScreen = ({ navigation }) => {
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
 
   const hideKeyboard = () => Keyboard.dismiss();
 
@@ -46,10 +47,11 @@ const SignInScreen = ({ navigation }) => {
           <WelcomeMessage />
           <View style={styles.inputContainer}>
             <Input
+              value={email}
               title={"E - mail"}
               image={"mail"}
               keyboardType={"email-address"}
-              // onChangeText={setEmail}
+              onChangeText={setEmail}
             />
 
             <PasswordInput value={password} onChangeText={setPassword} />
@@ -69,7 +71,9 @@ const SignInScreen = ({ navigation }) => {
           <Button
             title={"sign in"}
             onPres={() => {
-              //console.log("M", mail);
+              setEmail("");
+              setPassword("");
+              console.log("M", email);
               console.log("P", password);
             }}
           />

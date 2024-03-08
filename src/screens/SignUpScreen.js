@@ -1,40 +1,66 @@
-import { StyleSheet, View, Text, SafeAreaView, Platform } from "react-native";
-import React from "react";
+import {
+  StyleSheet,
+  View,
+  Text,
+  SafeAreaView,
+  Platform,
+  Keyboard,
+  Pressable,
+} from "react-native";
+import React, { useState } from "react";
 import WelcomeMessage from "../components/WelcomeMessage";
 import Input from "../components/Input";
 import NavigationButton from "../components/NavigationButton";
 import Button from "../components/Button/Button";
+import PasswordInput from "../components/PasswordInput/PasswordInput";
 import { THEME } from "../theme";
 import GradientContainer from "../components/GradientContainer";
 
 const SignUpScreen = ({ navigation }) => {
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+
+  const hideKeyboard = () => Keyboard.dismiss();
+
   const navigateToSignIn = () => {
     navigation.navigate("signInScreen");
   };
   return (
     <GradientContainer>
       <SafeAreaView style={styles.safeArea}>
-        <View style={styles.container}>
+        <Pressable style={styles.container}>
           <WelcomeMessage />
           <View style={styles.formContainer}>
             <Input
-              title={"Full Name"}
+              title={"Name"}
               image={"person-sharp"}
               keyboardType={"default"}
+              value={userName}
+              onChangeText={setUserName}
             />
 
             <Input
               title={"E - mail"}
               image={"mail"}
               keyboardType={"email-address"}
-            />
-            <Input
-              title={"Password"}
-              image={"lock-closed"}
-              keyboardType={"default"}
+              value={email}
+              onChangeText={setEmail}
             />
 
-            <Button title={"sign up"} />
+            <PasswordInput value={password} onChangeText={setPassword} />
+
+            <Button
+              title={"sign up"}
+              onPres={() => {
+                setUserName("");
+                setPassword("");
+                setEmail("");
+                console.log("N", userName);
+                console.log("P", password);
+                console.log("M", email);
+              }}
+            />
           </View>
           <View style={styles.signIn}>
             <Text style={styles.btnTitle}>Already have an account? </Text>
@@ -44,7 +70,7 @@ const SignUpScreen = ({ navigation }) => {
               onPress={navigateToSignIn}
             />
           </View>
-        </View>
+        </Pressable>
       </SafeAreaView>
     </GradientContainer>
   );
