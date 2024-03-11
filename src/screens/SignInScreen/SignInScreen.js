@@ -1,21 +1,21 @@
 import React, { useState } from "react";
 import {
-  StyleSheet,
   View,
   Text,
   SafeAreaView,
-  Platform,
   Alert,
   Pressable,
   Keyboard,
 } from "react-native";
-import WelcomeMessage from "../components/WelcomeMessage";
-import Input from "../components/Input";
-import NavigationButton from "../components/NavigationButton";
-import { THEME } from "../theme";
-import Button from "../components/Button/Button";
-import GradientContainer from "../components/GradientContainer";
-import PasswordInput from "../components/PasswordInput/PasswordInput";
+import WelcomeMessage from "../../components/WelcomeMessage";
+import Input from "../../components/Input";
+import NavigationButton from "../../components/NavigationButton";
+import { THEME } from "../../theme";
+import styles from "./SignInScreenStyles";
+import Button from "../../components/Button/Button";
+import GradientContainer from "../../components/GradientContainer";
+import PasswordInput from "../../components/PasswordInput/PasswordInput";
+import { dataMessage } from "../../components/WelcomeMessage/dataMessage";
 
 const SignInScreen = ({ navigation }) => {
   const [password, setPassword] = useState("");
@@ -44,7 +44,7 @@ const SignInScreen = ({ navigation }) => {
     <GradientContainer>
       <SafeAreaView style={styles.safeArea}>
         <Pressable style={styles.container} onPress={hideKeyboard}>
-          <WelcomeMessage />
+          <WelcomeMessage text={dataMessage.WELCOME_BACK_MESSAGE} />
           <View style={styles.inputContainer}>
             <Input
               value={email}
@@ -91,31 +91,5 @@ const SignInScreen = ({ navigation }) => {
     </GradientContainer>
   );
 };
-const styles = StyleSheet.create({
-  container: {
-    alignItems: "flex-end",
-    padding: 20,
-  },
-  safeArea: {
-    flex: 1,
-    paddingTop: Platform.OS === "android" ? 40 : 0,
-  },
-  signUp: {
-    width: "100%",
-    paddingVertical: 20,
-    justifyContent: "center",
-    flexDirection: "row",
-  },
-  btnTitle: {
-    fontFamily: "poppins-regular",
-    color: THEME.WHITE_TEXT_COLOR,
-    letterSpacing: 1.5,
-  },
-  inputContainer: {
-    marginTop: 40,
-    height: 150,
-    justifyContent: "space-between",
-  },
-});
 
 export default SignInScreen;

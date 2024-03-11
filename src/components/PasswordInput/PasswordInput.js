@@ -4,12 +4,14 @@ import { Ionicons } from "@expo/vector-icons";
 import styles from "./PasswordInputStyle";
 
 const PasswordInput = ({ onChangeText, value, ...rest }) => {
+  const [focus, setFocus] = useState(false);
   const [secureText, setSecureText] = useState(true);
 
   const visiblePAsswordHandler = (isVisible) => () => setSecureText(isVisible);
+  const activeBorderColor = focus ? "red" : "transparent";
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { borderColor: activeBorderColor }]}>
       <Ionicons name={"lock-closed"} size={26} color={"black"} />
       <TextInput
         autoCaptialize={"none"}
@@ -20,6 +22,10 @@ const PasswordInput = ({ onChangeText, value, ...rest }) => {
         placeholder={"Password"}
         style={styles.input}
         autoCorrect={false}
+        onFocus={() => {
+          setFocus(true);
+        }}
+        onBlur={() => setFocus(false)}
         {...rest}
       />
 

@@ -1,20 +1,14 @@
-import {
-  StyleSheet,
-  View,
-  Text,
-  SafeAreaView,
-  Platform,
-  Keyboard,
-  Pressable,
-} from "react-native";
+import { View, Text, SafeAreaView, Keyboard, Pressable } from "react-native";
 import React, { useState } from "react";
-import WelcomeMessage from "../components/WelcomeMessage";
-import Input from "../components/Input";
-import NavigationButton from "../components/NavigationButton";
-import Button from "../components/Button/Button";
-import PasswordInput from "../components/PasswordInput/PasswordInput";
-import { THEME } from "../theme";
-import GradientContainer from "../components/GradientContainer";
+import WelcomeMessage from "../../components/WelcomeMessage";
+import Input from "../../components/Input";
+import NavigationButton from "../../components/NavigationButton";
+import Button from "../../components/Button/Button";
+import PasswordInput from "../../components/PasswordInput/PasswordInput";
+import { THEME } from "../../theme";
+import styles from "./SignUpScreenStyles";
+import GradientContainer from "../../components/GradientContainer";
+import { dataMessage } from "../../components/WelcomeMessage/dataMessage";
 
 const SignUpScreen = ({ navigation }) => {
   const [userName, setUserName] = useState("");
@@ -29,8 +23,8 @@ const SignUpScreen = ({ navigation }) => {
   return (
     <GradientContainer>
       <SafeAreaView style={styles.safeArea}>
-        <Pressable style={styles.container}>
-          <WelcomeMessage />
+        <Pressable onPress={hideKeyboard} style={styles.container}>
+          <WelcomeMessage text={dataMessage.WELCOME_MESSAGE} />
           <View style={styles.formContainer}>
             <Input
               title={"Name"}
@@ -75,32 +69,5 @@ const SignUpScreen = ({ navigation }) => {
     </GradientContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: "flex-end",
-    padding: 20,
-  },
-  safeArea: {
-    flex: 1,
-    paddingTop: Platform.OS === "android" ? 40 : 0,
-  },
-  signIn: {
-    width: "100%",
-    paddingVertical: 20,
-    justifyContent: "center",
-    flexDirection: "row",
-  },
-  btnTitle: {
-    letterSpacing: 1.5,
-    fontFamily: "poppins-regular",
-    color: THEME.WHITE_TEXT_COLOR,
-  },
-  formContainer: {
-    width: "100%",
-    marginTop: 40,
-    rowGap: 40,
-  },
-});
 
 export default SignUpScreen;
