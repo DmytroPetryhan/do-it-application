@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import styles from "./ButtonStyle";
 
-const Button = ({ title, onPres, disabled = true, style }) => {
+const Button = ({ title, onPres, disabled, style }) => {
   return (
     <TouchableOpacity
       disabled={disabled}

@@ -1,5 +1,5 @@
 import { View, Text, SafeAreaView, Keyboard, Pressable } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import WelcomeMessage from "../../components/WelcomeMessage";
 import Input from "../../components/Input";
 import NavigationButton from "../../components/NavigationButton";
@@ -9,17 +9,46 @@ import { THEME } from "../../theme";
 import styles from "./SignUpScreenStyles";
 import GradientContainer from "../../components/GradientContainer";
 import { dataMessage } from "../../components/WelcomeMessage/dataMessage";
+import { useValidName } from "./useValidName";
+import { useValidEmail } from "./useValidEmail";
+import { useValidPassword } from "./useValidPassword";
 
 const SignUpScreen = ({ navigation }) => {
   const [userName, setUserName] = useState("");
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
+  const [userPassword, setUserPassword] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [errors, setErrors] = useState({});
+  const [disableButton, setDisableButton] = useState(true);
 
   const hideKeyboard = () => Keyboard.dismiss();
 
   const navigateToSignIn = () => {
     navigation.navigate("signInScreen");
   };
+  useEffect(() => {
+    setDisableButton(validationForm());
+  }, [userName, userPassword, userEmail]);
+
+  const validationForm = () => {
+    let errors = {};
+    if (!useValidName(userName)) errors.userName = "Incorrect user name";
+    if (!useValidEmail(userEmail)) errors.userEmail = "Incorrect user E-mail";
+    if (!useValidPassword(userPassword))
+      errors.userPassword = "Incorrect password";
+    setErrors(errors);
+
+    return Object.keys(errors).length !== 0;
+  };
+
+  const submitForm = () => {
+    setUserName("");
+    setUserPassword("");
+    setUserEmail("");
+    console.log("Name", userName);
+    console.log("Password", userPassword);
+    console.log("Email", userEmail);
+  };
+
   return (
     <GradientContainer>
       <SafeAreaView style={styles.safeArea}>
@@ -29,6 +58,7 @@ const SignUpScreen = ({ navigation }) => {
             <Input
               title={"Name"}
               image={"person-sharp"}
+              errorMessage={errors.userName}
               keyboardType={"default"}
               value={userName}
               onChangeText={setUserName}
@@ -37,23 +67,22 @@ const SignUpScreen = ({ navigation }) => {
             <Input
               title={"E - mail"}
               image={"mail"}
+              errorMessage={errors.userEmail}
               keyboardType={"email-address"}
-              value={email}
-              onChangeText={setEmail}
+              value={userEmail}
+              onChangeText={setUserEmail}
             />
 
-            <PasswordInput value={password} onChangeText={setPassword} />
+            <PasswordInput
+              value={userPassword}
+              errorMessage={errors.userPassword}
+              onChangeText={setUserPassword}
+            />
 
             <Button
+              disabled={disableButton}
               title={"sign up"}
-              onPres={() => {
-                setUserName("");
-                setPassword("");
-                setEmail("");
-                console.log("N", userName);
-                console.log("P", password);
-                console.log("M", email);
-              }}
+              onPres={submitForm}
             />
           </View>
           <View style={styles.signIn}>
