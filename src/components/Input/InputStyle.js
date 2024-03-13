@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
   },
 
   input: {
+    includeFontPadding: false,
     alignItems: "flex-end",
     flex: 1,
     fontSize: 20,

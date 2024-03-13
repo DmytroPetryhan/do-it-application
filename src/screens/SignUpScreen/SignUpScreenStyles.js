@@ -3,15 +3,16 @@ import { THEME } from "../../theme";
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "flex-end",
     padding: 20,
+    justifyContent: "center",
   },
   safeArea: {
-    flex: 1,
     paddingTop: Platform.OS === "android" ? 40 : 0,
   },
+  keyboardView: {
+    flex: 1,
+  },
   signIn: {
-    width: "100%",
     paddingVertical: 20,
     justifyContent: "center",
     flexDirection: "row",
@@ -22,8 +23,8 @@ const styles = StyleSheet.create({
     color: THEME.WHITE_TEXT_COLOR,
   },
   formContainer: {
-    width: "100%",
     marginTop: 40,
+    justifyContent: "space-between",
     rowGap: 40,
   },
 });

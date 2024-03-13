@@ -3,15 +3,16 @@ import { THEME } from "../../theme";
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "flex-end",
+    justifyContent: "center",
     padding: 20,
   },
   safeArea: {
-    flex: 1,
     paddingTop: Platform.OS === "android" ? 40 : 0,
   },
+  keyboardView: {
+    flex: 1,
+  },
   signUp: {
-    width: "100%",
     paddingVertical: 20,
     justifyContent: "center",
     flexDirection: "row",
@@ -25,6 +26,9 @@ const styles = StyleSheet.create({
     marginTop: 40,
     height: 150,
     justifyContent: "space-between",
+  },
+  forgetPassworButton: {
+    alignItems: "flex-end",
   },
 });
 

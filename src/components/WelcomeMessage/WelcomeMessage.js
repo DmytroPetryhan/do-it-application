@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Image } from "react-native";
 import styles from "./WelcomeMessageStyles";
-import { dataMessage } from "./dataMessage";
+import { dataMessage } from "../../data/dataMessageScreen";
 import checkmark from "../../img/titleAppScreenImage/Checkmark.png";
 
 const WelcomeMessage = ({ text }) => {

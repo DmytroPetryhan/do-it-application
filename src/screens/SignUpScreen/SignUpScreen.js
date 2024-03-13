@@ -1,4 +1,13 @@
-import { View, Text, SafeAreaView, Keyboard, Pressable } from "react-native";
+import {
+  View,
+  Text,
+  SafeAreaView,
+  Keyboard,
+  Pressable,
+  KeyboardAvoidingView,
+  Platform,
+  useWindowDimensions,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import WelcomeMessage from "../../components/WelcomeMessage";
 import Input from "../../components/Input";
@@ -8,7 +17,7 @@ import PasswordInput from "../../components/PasswordInput/PasswordInput";
 import { THEME } from "../../theme";
 import styles from "./SignUpScreenStyles";
 import GradientContainer from "../../components/GradientContainer";
-import { dataMessage } from "../../components/WelcomeMessage/dataMessage";
+import { dataMessage } from "../../data/dataMessageScreen";
 import { useValidName } from "./useValidName";
 import { useValidEmail } from "./useValidEmail";
 import { useValidPassword } from "./useValidPassword";
@@ -21,9 +30,10 @@ const SignUpScreen = ({ navigation }) => {
   const [disableButton, setDisableButton] = useState(true);
 
   const hideKeyboard = () => Keyboard.dismiss();
+  const { height } = useWindowDimensions();
 
-  const navigateToSignIn = () => {
-    navigation.navigate("signInScreen");
+  const navigateToSignIn = (route) => {
+    return () => navigation.navigate(route);
   };
   useEffect(() => {
     setDisableButton(validationForm());
@@ -48,53 +58,59 @@ const SignUpScreen = ({ navigation }) => {
     console.log("Password", userPassword);
     console.log("Email", userEmail);
   };
-
   return (
     <GradientContainer>
-      <SafeAreaView style={styles.safeArea}>
-        <Pressable onPress={hideKeyboard} style={styles.container}>
-          <WelcomeMessage text={dataMessage.WELCOME_MESSAGE} />
-          <View style={styles.formContainer}>
-            <Input
-              title={"Name"}
-              image={"person-sharp"}
-              errorMessage={errors.userName}
-              keyboardType={"default"}
-              value={userName}
-              onChangeText={setUserName}
-            />
+      <KeyboardAvoidingView
+        keyboardVerticalOffset={height / 3}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.keyboardView}
+      >
+        <SafeAreaView style={styles.safeArea}>
+          <Pressable onPress={hideKeyboard} style={styles.container}>
+            <WelcomeMessage text={dataMessage.WELCOME_MESSAGE} />
+            <View style={styles.formContainer}>
+              <Input
+                title={"Name"}
+                image={"person-sharp"}
+                errorMessage={errors.userName}
+                keyboardType={"default"}
+                value={userName}
+                onChangeText={setUserName}
+              />
 
-            <Input
-              title={"E - mail"}
-              image={"mail"}
-              errorMessage={errors.userEmail}
-              keyboardType={"email-address"}
-              value={userEmail}
-              onChangeText={setUserEmail}
-            />
+              <Input
+                title={"E - mail"}
+                image={"mail"}
+                errorMessage={errors.userEmail}
+                keyboardType={"email-address"}
+                value={userEmail}
+                onChangeText={setUserEmail}
+              />
 
-            <PasswordInput
-              value={userPassword}
-              errorMessage={errors.userPassword}
-              onChangeText={setUserPassword}
-            />
+              <PasswordInput
+                value={userPassword}
+                errorMessage={errors.userPassword}
+                onChangeText={setUserPassword}
+              />
 
-            <Button
-              disabled={disableButton}
-              title={"sign up"}
-              onPres={submitForm}
-            />
-          </View>
-          <View style={styles.signIn}>
-            <Text style={styles.btnTitle}>Already have an account? </Text>
-            <NavigationButton
-              title={"sign in"}
-              textColor={THEME.SIGN_UP_IN_COLOR}
-              onPress={navigateToSignIn}
-            />
-          </View>
-        </Pressable>
-      </SafeAreaView>
+              <Button
+                disabled={disableButton}
+                title={"sign up"}
+                onPres={submitForm}
+              />
+            </View>
+
+            <View style={styles.signIn}>
+              <Text style={styles.btnTitle}>Already have an account? </Text>
+              <NavigationButton
+                title={"sign in"}
+                textColor={THEME.SIGN_UP_IN_COLOR}
+                onPress={navigateToSignIn("signInScreen")}
+              />
+            </View>
+          </Pressable>
+        </SafeAreaView>
+      </KeyboardAvoidingView>
     </GradientContainer>
   );
 };
