@@ -11,20 +11,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     backgroundColor: "#FFFFFF",
     borderRadius: 5,
+    borderWidth: 2,
   },
 
   input: {
-    alignItems: "flex-end",
+    includeFontPadding: false,
     flex: 1,
     fontSize: 20,
     fontFamily: "poppins-regular",
     marginLeft: 10,
-  },
-  passwordWarning: {
-    marginBottom: 5,
-    fontSize: 14,
-    color: THEME.WARNING_RED_COLOR,
-    fontFamily: "poppins-regular",
   },
 });
 export default styles;

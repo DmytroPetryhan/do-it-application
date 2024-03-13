@@ -1,12 +1,12 @@
 import React, { useState, useRef } from "react";
 import { StyleSheet, FlatList, View, Dimensions } from "react-native";
-import { onboardingData } from "../data/onboardingData";
-import OnboardingCarusel from "../components/OnboardingCarusel";
-import Paginator from "../components/Paginator";
-import OnboardButton from "../components/OnboardButton";
+import { onboardingData } from "../../data/onboardingData";
+import styles from "./OnboardingScreenStyles";
+import OnboardingCarusel from "../../components/OnboardingCarusel";
+import Paginator from "../../components/Paginator";
+import OnboardButton from "../../components/OnboardButton";
 import { AntDesign } from "@expo/vector-icons";
-import GradientContainer from "../components/GradientContainer";
-const { height, width } = Dimensions.get("window");
+import GradientContainer from "../../components/GradientContainer";
 
 const OnboardingScreen = ({ navigation }) => {
   const swipeLength = onboardingData.length - 1;
@@ -59,20 +59,5 @@ const OnboardingScreen = ({ navigation }) => {
     </GradientContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "flex-end",
-  },
-  bottomContainer: {
-    position: "absolute",
-    bottom: height / 8,
-    width: width - width / 3,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-around",
-  },
-});
 
 export default OnboardingScreen;

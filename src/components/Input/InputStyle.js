@@ -1,5 +1,4 @@
-import { StyleSheet, Dimensions } from "react-native";
-const { height, width } = Dimensions.get("window");
+import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
@@ -10,9 +9,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     backgroundColor: "#FFFFFF",
     borderRadius: 5,
+    borderWidth: 2,
   },
 
   input: {
+    includeFontPadding: false,
     alignItems: "flex-end",
     flex: 1,
     fontSize: 20,
