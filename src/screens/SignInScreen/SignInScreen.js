@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -19,15 +19,39 @@ import Button from "../../components/Button/Button";
 import GradientContainer from "../../components/GradientContainer";
 import PasswordInput from "../../components/PasswordInput/PasswordInput";
 import { dataMessage } from "../../data/dataMessageScreen";
-
+import { useValidEmail } from "../SignUpScreen/useValidEmail";
+import { useValidPassword } from "../SignUpScreen/useValidPassword";
 const SignInScreen = ({ navigation }) => {
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
+  const [userPassword, setUserPassword] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [errors, setErrors] = useState({});
+  const [disableButton, setDisableButton] = useState(true);
 
   const hideKeyboard = () => Keyboard.dismiss();
   const { height } = useWindowDimensions();
 
-  const navigateToSignUp = () => navigation.navigate("signUpScreen");
+  const navigateHandler = (route) => () => navigation.navigate(route);
+
+  useEffect(() => {
+    setDisableButton(validationForm());
+  }, [userPassword, userEmail]);
+
+  const validationForm = () => {
+    let errors = {};
+    if (!useValidEmail(userEmail)) errors.userEmail = "Incorret E-mail";
+    if (!useValidPassword(userPassword))
+      errors.userPassword = "Incorrect password";
+    setErrors(errors);
+
+    return Object.keys(errors).length !== 0;
+  };
+
+  const submitForm = () => {
+    setUserPassword("");
+    setUserEmail("");
+    console.log("Password", userPassword);
+    console.log("Email", userEmail);
+  };
 
   const remindPassword = () => {
     Alert.alert("Forget password ?", "Please enter a new password !!!", [
@@ -56,14 +80,19 @@ const SignInScreen = ({ navigation }) => {
             <WelcomeMessage text={dataMessage.WELCOME_BACK_MESSAGE} />
             <View style={styles.inputContainer}>
               <Input
-                value={email}
+                value={userEmail}
                 title={"E - mail"}
                 image={"mail"}
+                errorMessage={errors.userEmail}
                 keyboardType={"email-address"}
-                onChangeText={setEmail}
+                onChangeText={setUserEmail}
               />
 
-              <PasswordInput value={password} onChangeText={setPassword} />
+              <PasswordInput
+                value={userPassword}
+                errorMessage={errors.userPassword}
+                onChangeText={setUserPassword}
+              />
             </View>
             <View style={styles.forgetPassworButton}>
               <NavigationButton
@@ -79,12 +108,8 @@ const SignInScreen = ({ navigation }) => {
             </View>
             <Button
               title={"sign in"}
-              onPres={() => {
-                setEmail("");
-                setPassword("");
-                console.log("M", email);
-                console.log("P", password);
-              }}
+              onPres={submitForm}
+              disabled={disableButton}
             />
 
             <View style={styles.signUp}>
@@ -92,7 +117,7 @@ const SignInScreen = ({ navigation }) => {
               <NavigationButton
                 title={"sign up"}
                 textColor={THEME.SIGN_UP_IN_COLOR}
-                onPress={navigateToSignUp}
+                onPress={navigateHandler("signUpScreen")}
               />
             </View>
           </Pressable>

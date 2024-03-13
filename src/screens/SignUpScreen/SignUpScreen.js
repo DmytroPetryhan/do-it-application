@@ -32,9 +32,8 @@ const SignUpScreen = ({ navigation }) => {
   const hideKeyboard = () => Keyboard.dismiss();
   const { height } = useWindowDimensions();
 
-  const navigateToSignIn = (route) => {
-    return () => navigation.navigate(route);
-  };
+  const navigateToSignIn = (route) => () => navigation.navigate(route);
+
   useEffect(() => {
     setDisableButton(validationForm());
   }, [userName, userPassword, userEmail]);
@@ -42,7 +41,7 @@ const SignUpScreen = ({ navigation }) => {
   const validationForm = () => {
     let errors = {};
     if (!useValidName(userName)) errors.userName = "Incorrect user name";
-    if (!useValidEmail(userEmail)) errors.userEmail = "Incorrect user E-mail";
+    if (!useValidEmail(userEmail)) errors.userEmail = "Incorrect E-mail";
     if (!useValidPassword(userPassword))
       errors.userPassword = "Incorrect password";
     setErrors(errors);
