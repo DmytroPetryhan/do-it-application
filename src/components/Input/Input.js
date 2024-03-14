@@ -18,7 +18,7 @@ const Input = (props) => {
   } = props;
 
   const activeBorderColor =
-    focus && errorMessage ? THEME.WARNING_RED_COLOR : "transparent";
+    focus && errorMessage && value ? THEME.WARNING_RED_COLOR : "transparent";
 
   return (
     <View>
@@ -39,7 +39,7 @@ const Input = (props) => {
           {...rest}
         />
       </View>
-      {focus && errorMessage ? <ErrorMessage message={errorMessage} /> : null}
+      {focus && value ? <ErrorMessage message={errorMessage} /> : null}
     </View>
   );
 };

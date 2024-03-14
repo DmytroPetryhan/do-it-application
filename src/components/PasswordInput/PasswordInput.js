@@ -12,7 +12,7 @@ const PasswordInput = ({ onChangeText, value, errorMessage, ...rest }) => {
   const visiblePAsswordHandler = (isVisible) => () => setSecureText(isVisible);
 
   const activeBorderColor =
-    focus && errorMessage ? THEME.WARNING_RED_COLOR : "transparent";
+    focus && errorMessage && value ? THEME.WARNING_RED_COLOR : "transparent";
 
   return (
     <View>
@@ -45,7 +45,7 @@ const PasswordInput = ({ onChangeText, value, errorMessage, ...rest }) => {
           />
         </Pressable>
       </View>
-      {focus && errorMessage ? <ErrorMessage message={errorMessage} /> : null}
+      {focus && value ? <ErrorMessage message={errorMessage} /> : null}
     </View>
   );
 };
