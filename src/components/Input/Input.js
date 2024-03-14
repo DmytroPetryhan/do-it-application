@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { View, TextInput } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { THEME } from "../../theme";
+import { debounce } from "lodash";
 import styles from "./InputStyle";
 import ErrorMessage from "../ErrorMessage";
-import { THEME } from "../../theme";
 
 const Input = (props) => {
   const [focus, setFocus] = useState(false);
@@ -20,6 +21,10 @@ const Input = (props) => {
   const activeBorderColor =
     focus && errorMessage && value ? THEME.WARNING_RED_COLOR : "transparent";
 
+  const debounceHandler = useCallback(
+    debounce((text) => onChangeText(text), 500)
+  );
+
   return (
     <View>
       <View style={[styles.container, { borderColor: activeBorderColor }]}>
@@ -27,9 +32,8 @@ const Input = (props) => {
         <TextInput
           autoCaptialize={"none"}
           keyboardType={keyboardType}
-          onChangeText={onChangeText}
+          onChangeText={debounceHandler}
           placeholder={title}
-          value={value}
           autoCorrect={false}
           onFocus={() => {
             setFocus(true);
