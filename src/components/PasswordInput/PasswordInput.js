@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { View, TextInput, Pressable } from "react-native";
-import ErrorMessage from "../ErrorMessage";
 import { Ionicons } from "@expo/vector-icons";
-import styles from "./PasswordInputStyle";
 import { THEME } from "../../theme";
+import { debounce } from "lodash";
+import ErrorMessage from "../ErrorMessage";
+import styles from "./PasswordInputStyle";
 
 const PasswordInput = ({ onChangeText, value, errorMessage, ...rest }) => {
   const [focus, setFocus] = useState(false);
@@ -12,8 +13,11 @@ const PasswordInput = ({ onChangeText, value, errorMessage, ...rest }) => {
   const visiblePAsswordHandler = (isVisible) => () => setSecureText(isVisible);
 
   const activeBorderColor =
-    focus && errorMessage ? THEME.WARNING_RED_COLOR : "transparent";
+    focus && errorMessage && value ? THEME.WARNING_RED_COLOR : "transparent";
 
+  const debounceHandler = useCallback(
+    debounce((text) => onChangeText(text), 500)
+  );
   return (
     <View>
       <View style={[styles.container, { borderColor: activeBorderColor }]}>
@@ -22,8 +26,7 @@ const PasswordInput = ({ onChangeText, value, errorMessage, ...rest }) => {
           autoCaptialize={"none"}
           keyboardType={"default"}
           secureTextEntry={secureText}
-          onChangeText={onChangeText}
-          value={value}
+          onChangeText={debounceHandler}
           placeholder={"Password"}
           style={styles.input}
           autoCorrect={false}
@@ -45,7 +48,7 @@ const PasswordInput = ({ onChangeText, value, errorMessage, ...rest }) => {
           />
         </Pressable>
       </View>
-      {focus && errorMessage ? <ErrorMessage message={errorMessage} /> : null}
+      {focus && value ? <ErrorMessage message={errorMessage} /> : null}
     </View>
   );
 };
