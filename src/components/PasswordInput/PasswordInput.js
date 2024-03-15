@@ -28,12 +28,13 @@ const PasswordInput = ({ onChangeText, value, errorMessage, ...rest }) => {
           secureTextEntry={secureText}
           onChangeText={debounceHandler}
           placeholder={"Password"}
-          style={styles.input}
           autoCorrect={false}
           onFocus={() => {
             setFocus(true);
           }}
           onBlur={() => setFocus(false)}
+          returnKeyType={"done"}
+          style={styles.input}
           {...rest}
         />
 
