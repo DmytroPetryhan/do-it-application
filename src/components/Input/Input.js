@@ -39,6 +39,7 @@ const Input = (props) => {
             setFocus(true);
           }}
           onBlur={() => setFocus(false)}
+          returnKeyType={"done"}
           style={styles.input}
           {...rest}
         />
