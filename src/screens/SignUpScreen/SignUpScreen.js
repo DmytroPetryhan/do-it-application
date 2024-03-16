@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -8,7 +9,6 @@ import {
   Platform,
   useWindowDimensions,
 } from "react-native";
-import React, { useEffect, useState } from "react";
 import WelcomeMessage from "../../components/WelcomeMessage";
 import Input from "../../components/Input";
 import NavigationButton from "../../components/NavigationButton";
@@ -28,6 +28,7 @@ const SignUpScreen = ({ navigation }) => {
   const [userEmail, setUserEmail] = useState("");
   const [errors, setErrors] = useState({});
   const [disableButton, setDisableButton] = useState(true);
+  const [cleareInput, setCleareInput] = useState(false);
 
   const hideKeyboard = () => Keyboard.dismiss();
   const { height } = useWindowDimensions();
@@ -50,6 +51,7 @@ const SignUpScreen = ({ navigation }) => {
   };
 
   const submitForm = () => {
+    setCleareInput(true);
     setUserName("");
     setUserPassword("");
     setUserEmail("");
@@ -74,6 +76,7 @@ const SignUpScreen = ({ navigation }) => {
                 errorMessage={errors.userName}
                 keyboardType={"default"}
                 value={userName}
+                cleareInput={cleareInput}
                 onChangeText={setUserName}
               />
 
@@ -83,12 +86,14 @@ const SignUpScreen = ({ navigation }) => {
                 errorMessage={errors.userEmail}
                 keyboardType={"email-address"}
                 value={userEmail}
+                cleareInput={cleareInput}
                 onChangeText={setUserEmail}
               />
 
               <PasswordInput
-                value={userPassword}
                 errorMessage={errors.userPassword}
+                value={userPassword}
+                cleareInput={cleareInput}
                 onChangeText={setUserPassword}
               />
 
