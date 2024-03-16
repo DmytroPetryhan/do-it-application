@@ -29,7 +29,7 @@ const SignUpScreen = ({ navigation }) => {
   const [errors, setErrors] = useState({});
   const [disableButton, setDisableButton] = useState(true);
   const [cleareInput, setCleareInput] = useState(false);
-
+  console.log("CLEARE IN", cleareInput);
   const hideKeyboard = () => Keyboard.dismiss();
   const { height } = useWindowDimensions();
 
@@ -46,7 +46,7 @@ const SignUpScreen = ({ navigation }) => {
     if (!useValidPassword(userPassword))
       errors.userPassword = "Incorrect password";
     setErrors(errors);
-
+    setCleareInput(false);
     return Object.keys(errors).length !== 0;
   };
 

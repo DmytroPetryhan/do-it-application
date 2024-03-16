@@ -23,7 +23,7 @@ const Input = (props) => {
 
   useEffect(() => {
     if (cleareInput) inpRef.current?.setNativeProps({ text: "" });
-  }, [cleareInput]);
+  });
 
   const activeBorderColor =
     focus && errorMessage && value ? THEME.WARNING_RED_COLOR : "transparent";
