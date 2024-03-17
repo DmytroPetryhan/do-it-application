@@ -10,17 +10,18 @@ import {
   useWindowDimensions,
   Platform,
 } from "react-native";
+import { dataMessage } from "../../data/dataMessageScreen";
+import { useValidEmail } from "../SignUpScreen/useValidEmail";
+import { useValidPassword } from "../SignUpScreen/useValidPassword";
+import { THEME } from "../../theme";
 import WelcomeMessage from "../../components/WelcomeMessage";
 import Input from "../../components/Input";
 import NavigationButton from "../../components/NavigationButton";
-import { THEME } from "../../theme";
 import styles from "./SignInScreenStyles";
 import Button from "../../components/Button/Button";
 import GradientContainer from "../../components/GradientContainer";
 import PasswordInput from "../../components/PasswordInput/PasswordInput";
-import { dataMessage } from "../../data/dataMessageScreen";
-import { useValidEmail } from "../SignUpScreen/useValidEmail";
-import { useValidPassword } from "../SignUpScreen/useValidPassword";
+
 const SignInScreen = ({ navigation }) => {
   const [userPassword, setUserPassword] = useState("");
   const [userEmail, setUserEmail] = useState("");
@@ -33,7 +34,8 @@ const SignInScreen = ({ navigation }) => {
   const navigateHandler = (route) => () => navigation.navigate(route);
 
   useEffect(() => {
-    setDisableButton(validationForm());
+    const isValid = validationForm();
+    if (!isValid) setDisableButton(false);
   }, [userPassword, userEmail]);
 
   const validationForm = () => {
@@ -47,10 +49,10 @@ const SignInScreen = ({ navigation }) => {
   };
 
   const submitForm = () => {
-    setUserPassword("");
-    setUserEmail("");
-    console.log("Password", userPassword);
-    console.log("Email", userEmail);
+    const findUser = {
+      userEmail,
+      userPassword,
+    };
   };
 
   const remindPassword = () => {

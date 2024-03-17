@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useRef } from "react";
+import React, { useState, useCallback } from "react";
 import { View, TextInput, Pressable } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { THEME } from "../../theme";
@@ -10,12 +10,6 @@ const PasswordInput = (props) => {
   const { onChangeText, value, errorMessage, cleareInput, ...rest } = props;
   const [focus, setFocus] = useState(false);
   const [secureText, setSecureText] = useState(true);
-
-  const inputRef = useRef();
-
-  useEffect(() => {
-    if (cleareInput) inputRef.current?.setNativeProps({ text: "" });
-  }, [cleareInput]);
 
   const visiblePAsswordHandler = (isVisible) => () => setSecureText(isVisible);
 
@@ -30,7 +24,6 @@ const PasswordInput = (props) => {
       <View style={[styles.container, { borderColor: activeBorderColor }]}>
         <Ionicons name={"lock-closed"} size={26} color={"black"} />
         <TextInput
-          ref={inputRef}
           autoCaptialize={"none"}
           keyboardType={"default"}
           secureTextEntry={secureText}

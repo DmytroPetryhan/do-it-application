@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -9,18 +8,19 @@ import {
   Platform,
   useWindowDimensions,
 } from "react-native";
+import React, { useEffect, useState } from "react";
+import { dataMessage } from "../../data/dataMessageScreen";
+import { useValidName } from "./useValidName";
+import { useValidEmail } from "./useValidEmail";
+import { useValidPassword } from "./useValidPassword";
+import { THEME } from "../../theme";
 import WelcomeMessage from "../../components/WelcomeMessage";
 import Input from "../../components/Input";
 import NavigationButton from "../../components/NavigationButton";
 import Button from "../../components/Button/Button";
 import PasswordInput from "../../components/PasswordInput/PasswordInput";
-import { THEME } from "../../theme";
 import styles from "./SignUpScreenStyles";
 import GradientContainer from "../../components/GradientContainer";
-import { dataMessage } from "../../data/dataMessageScreen";
-import { useValidName } from "./useValidName";
-import { useValidEmail } from "./useValidEmail";
-import { useValidPassword } from "./useValidPassword";
 
 const SignUpScreen = ({ navigation }) => {
   const [userName, setUserName] = useState("");
@@ -28,15 +28,15 @@ const SignUpScreen = ({ navigation }) => {
   const [userEmail, setUserEmail] = useState("");
   const [errors, setErrors] = useState({});
   const [disableButton, setDisableButton] = useState(true);
-  const [cleareInput, setCleareInput] = useState(false);
-  console.log("CLEARE IN", cleareInput);
+
   const hideKeyboard = () => Keyboard.dismiss();
   const { height } = useWindowDimensions();
 
   const navigateToSignIn = (route) => () => navigation.navigate(route);
 
   useEffect(() => {
-    setDisableButton(validationForm());
+    const isValid = validationForm();
+    if (!isValid) setDisableButton(false);
   }, [userName, userPassword, userEmail]);
 
   const validationForm = () => {
@@ -45,19 +45,19 @@ const SignUpScreen = ({ navigation }) => {
     if (!useValidEmail(userEmail)) errors.userEmail = "Incorrect E-mail";
     if (!useValidPassword(userPassword))
       errors.userPassword = "Incorrect password";
+
     setErrors(errors);
-    setCleareInput(false);
+
     return Object.keys(errors).length !== 0;
   };
 
   const submitForm = () => {
-    setCleareInput(true);
-    setUserName("");
-    setUserPassword("");
-    setUserEmail("");
-    console.log("Name", userName);
-    console.log("Password", userPassword);
-    console.log("Email", userEmail);
+    const newUser = {
+      userName,
+      userEmail,
+      userPassword,
+      items: {},
+    };
   };
   return (
     <GradientContainer>
@@ -76,7 +76,6 @@ const SignUpScreen = ({ navigation }) => {
                 errorMessage={errors.userName}
                 keyboardType={"default"}
                 value={userName}
-                cleareInput={cleareInput}
                 onChangeText={setUserName}
               />
 
@@ -86,14 +85,12 @@ const SignUpScreen = ({ navigation }) => {
                 errorMessage={errors.userEmail}
                 keyboardType={"email-address"}
                 value={userEmail}
-                cleareInput={cleareInput}
                 onChangeText={setUserEmail}
               />
 
               <PasswordInput
-                errorMessage={errors.userPassword}
                 value={userPassword}
-                cleareInput={cleareInput}
+                errorMessage={errors.userPassword}
                 onChangeText={setUserPassword}
               />
 
