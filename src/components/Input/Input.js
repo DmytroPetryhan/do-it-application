@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef, useEffect } from "react";
+import React, { useState, useCallback } from "react";
 import { View, TextInput } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { THEME } from "../../theme";
@@ -15,15 +15,8 @@ const Input = (props) => {
     keyboardType,
     value,
     errorMessage,
-    cleareInput,
     ...rest
   } = props;
-
-  const inpRef = useRef();
-
-  useEffect(() => {
-    if (cleareInput) inpRef.current?.setNativeProps({ text: "" });
-  });
 
   const activeBorderColor =
     focus && errorMessage && value ? THEME.WARNING_RED_COLOR : "transparent";
@@ -37,7 +30,6 @@ const Input = (props) => {
       <View style={[styles.container, { borderColor: activeBorderColor }]}>
         <Ionicons name={image} size={26} color={"black"} />
         <TextInput
-          ref={inpRef}
           autoCaptialize={"none"}
           keyboardType={keyboardType}
           onChangeText={debounceHandler}
