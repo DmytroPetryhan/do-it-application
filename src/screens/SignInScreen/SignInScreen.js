@@ -35,7 +35,7 @@ const SignInScreen = ({ navigation }) => {
 
   useEffect(() => {
     const isValid = validationForm();
-    if (!isValid) setDisableButton(false);
+    isValid ? setDisableButton(true) : setDisableButton(false);
   }, [userPassword, userEmail]);
 
   const validationForm = () => {
