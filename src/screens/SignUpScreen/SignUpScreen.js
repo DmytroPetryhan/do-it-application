@@ -15,7 +15,7 @@ import { useValidName } from "./useValidName";
 import { useValidEmail } from "./useValidEmail";
 import { useValidPassword } from "./useValidPassword";
 import { THEME } from "../../theme";
-import { signUpUser } from "../../API";
+import { signUpUser } from "../../../firebase";
 import WelcomeMessage from "../../components/WelcomeMessage";
 import Input from "../../components/Input";
 import NavigationButton from "../../components/NavigationButton";
@@ -60,6 +60,7 @@ const SignUpScreen = ({ navigation }) => {
       items: {},
     };
     const request = await signUpUser(newUser);
+
     if (request.status === "success") {
       alert("New user added");
     } else {

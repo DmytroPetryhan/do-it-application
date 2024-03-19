@@ -1,5 +1,4 @@
-import axios from "axios";
-const baseUrl = "https://test-version-do-it-app-default-rtdb.firebaseio.com/";
+import { api } from "../API";
 
 export const signUpUser = async (user) => {
   const users = await allUsersList();
@@ -19,11 +18,12 @@ export const signUpUser = async (user) => {
     };
   }
   try {
-    const newUser = axios.post(`${baseUrl}.json`, {
+    const newUser = api.post(".json", {
       userName,
       userEmail,
       userPassword,
-      items: {},
+      onBoarding: true,
+      items: [1, 2],
     });
 
     return {
@@ -39,7 +39,11 @@ export const signUpUser = async (user) => {
 };
 
 const allUsersList = async () => {
-  const request = (await axios.get(`${baseUrl}.json`)).data || {};
-  const users = Object.keys(request).map((k) => ({ ...request[k] })) || [];
-  return users;
+  try {
+    const request = (await api.get(".json")).data;
+    const users = Object.keys(request).map((k) => ({ ...request[k] }));
+    return users;
+  } catch (error) {
+    return [];
+  }
 };
