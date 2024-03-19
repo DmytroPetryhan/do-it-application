@@ -7,6 +7,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   useWindowDimensions,
+  Alert,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { dataMessage } from "../../data/dataMessageScreen";
@@ -14,6 +15,7 @@ import { useValidName } from "./useValidName";
 import { useValidEmail } from "./useValidEmail";
 import { useValidPassword } from "./useValidPassword";
 import { THEME } from "../../theme";
+import { signUpUser } from "../../../firebase";
 import WelcomeMessage from "../../components/WelcomeMessage";
 import Input from "../../components/Input";
 import NavigationButton from "../../components/NavigationButton";
@@ -36,28 +38,34 @@ const SignUpScreen = ({ navigation }) => {
 
   useEffect(() => {
     const isValid = validationForm();
-    if (!isValid) setDisableButton(false);
+    isValid ? setDisableButton(true) : setDisableButton(false);
   }, [userName, userPassword, userEmail]);
 
   const validationForm = () => {
     let errors = {};
-    if (!useValidName(userName)) errors.userName = "Incorrect user name";
-    if (!useValidEmail(userEmail)) errors.userEmail = "Incorrect E-mail";
-    if (!useValidPassword(userPassword))
+    if (!useValidName(userName.trim())) errors.userName = "Incorrect user name";
+    if (!useValidEmail(userEmail.trim())) errors.userEmail = "Incorrect E-mail";
+    if (!useValidPassword(userPassword.trim()))
       errors.userPassword = "Incorrect password";
 
     setErrors(errors);
-
     return Object.keys(errors).length !== 0;
   };
 
-  const submitForm = () => {
+  const submitForm = async () => {
     const newUser = {
       userName,
       userEmail,
       userPassword,
       items: {},
     };
+    const request = await signUpUser(newUser);
+
+    if (request.status === "success") {
+      alert("New user added");
+    } else {
+      alert(request.errorMessade);
+    }
   };
   return (
     <GradientContainer>

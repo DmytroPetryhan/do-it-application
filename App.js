@@ -4,6 +4,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
 import { View } from "react-native";
 import RootNavigation from "./src/navigation/RootNavigation";
+import SignUpScreen from "./src/screens/SignUpScreen";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -25,7 +26,8 @@ export default function App() {
   return (
     <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
       <StatusBar style="light" />
-      <RootNavigation />
+      <SignUpScreen />
+      {/* <RootNavigation /> */}
     </View>
   );
 }
