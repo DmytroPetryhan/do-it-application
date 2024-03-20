@@ -1,13 +1,14 @@
 import { api } from "../API";
 
 export const signUpUser = async (user) => {
-  const users = await allUsersList();
   const {
     userName,
     userEmail,
     userPassword,
     items: {},
   } = user;
+
+  const users = await allUsersList();
 
   const checkValidUser = users.filter((item) => item.userEmail === userEmail);
 
@@ -25,7 +26,6 @@ export const signUpUser = async (user) => {
       onBoarding: true,
       items: [1, 2],
     });
-
     return {
       status: "success",
       newUser: await newUser,
@@ -38,10 +38,33 @@ export const signUpUser = async (user) => {
   }
 };
 
+export const signInUser = async (userData) => {
+  const { userEmail, userPassword } = userData;
+  const users = await allUsersList();
+
+  const user = users.filter(
+    (user) => user.userEmail === userEmail && user.userPassword === userPassword
+  );
+  if (user.length) {
+    return {
+      status: "success",
+      newUser: user,
+    };
+  } else {
+    return {
+      status: "fail",
+      errorMessade: "Incorrect email or password",
+    };
+  }
+};
+
 const allUsersList = async () => {
   try {
     const request = (await api.get(".json")).data;
-    const users = Object.keys(request).map((k) => ({ ...request[k] }));
+    const users = Object.keys(request).map((key) => ({
+      ...request[key],
+      id: key,
+    }));
     return users;
   } catch (error) {
     return [];
