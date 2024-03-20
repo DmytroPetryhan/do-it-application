@@ -62,7 +62,12 @@ const SignUpScreen = ({ navigation }) => {
     const request = await signUpUser(newUser);
 
     if (request.status === "success") {
-      alert("New user added");
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{ name: "BottomTabsStack" }],
+        })
+      );
     } else {
       alert(request.errorMessade);
     }

@@ -1,13 +1,12 @@
-import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import TitleAppScreen from "../screens/TitleAppScreen/";
 import OnboardingScreen from "../screens/OnboardingScreen";
 import SignInScreen from "../screens/SignInScreen";
 import SignUpScreen from "../screens/SignUpScreen";
 
-const PrimaryInformationStack = () => {
-  const PrimaryInformationNavigation = createNativeStackNavigator();
+const PrimaryInformationNavigation = createNativeStackNavigator();
 
+const PrimaryInformationStack = () => {
   return (
     <PrimaryInformationNavigation.Navigator
       initialRouteName="titlScreen"

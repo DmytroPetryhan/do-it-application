@@ -6,7 +6,7 @@ import { View } from "react-native";
 import RootNavigation from "./src/navigation/RootNavigation";
 import SignUpScreen from "./src/screens/SignUpScreen";
 import SignInScreen from "./src/screens/SignInScreen";
-
+import HomePageScreen from "./src/screens/HomePageScreen";
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
@@ -27,9 +27,10 @@ export default function App() {
   return (
     <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
       <StatusBar style="light" />
-      <SignInScreen />
+      {/* <HomePageScreen /> */}
+      {/* <SignInScreen /> */}
       {/* <SignUpScreen /> */}
-      {/* <RootNavigation /> */}
+      <RootNavigation />
     </View>
   );
 }

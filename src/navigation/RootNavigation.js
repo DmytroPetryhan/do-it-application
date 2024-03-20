@@ -1,10 +1,10 @@
 import { NavigationContainer } from "@react-navigation/native";
-import PrimaryInformationStack from "./PrimaryInformationStack";
+import MainGroupStack from "./MainGroupStack";
 
 const RootNavigation = () => {
   return (
     <NavigationContainer theme={{ colors: { background: "transparent" } }}>
-      <PrimaryInformationStack />
+      <MainGroupStack />
     </NavigationContainer>
   );
 };
