@@ -14,6 +14,7 @@ import { dataMessage } from "../../data/dataMessageScreen";
 import { useValidEmail } from "../SignUpScreen/useValidEmail";
 import { useValidPassword } from "../SignUpScreen/useValidPassword";
 import { THEME } from "../../theme";
+import { signInUser } from "../../../firebase";
 import WelcomeMessage from "../../components/WelcomeMessage";
 import Input from "../../components/Input";
 import NavigationButton from "../../components/NavigationButton";
@@ -48,11 +49,18 @@ const SignInScreen = ({ navigation }) => {
     return Object.keys(errors).length !== 0;
   };
 
-  const submitForm = () => {
+  const submitForm = async () => {
     const findUser = {
       userEmail,
       userPassword,
     };
+    const request = await signInUser(findUser);
+
+    if (request.status === "success") {
+      alert("User was finded");
+    } else {
+      alert(request.errorMessade);
+    }
   };
 
   const remindPassword = () => {

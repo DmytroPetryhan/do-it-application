@@ -5,6 +5,7 @@ import { useFonts } from "expo-font";
 import { View } from "react-native";
 import RootNavigation from "./src/navigation/RootNavigation";
 import SignUpScreen from "./src/screens/SignUpScreen";
+import SignInScreen from "./src/screens/SignInScreen";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -26,7 +27,8 @@ export default function App() {
   return (
     <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
       <StatusBar style="light" />
-      <SignUpScreen />
+      <SignInScreen />
+      {/* <SignUpScreen /> */}
       {/* <RootNavigation /> */}
     </View>
   );
