@@ -23,7 +23,8 @@ export default function TitleAppScreen({ navigation }) {
       toValue: 0,
       duration: 2000,
       useNativeDriver: true,
-    }).start(() => navigation.navigate("onboardingScreen"));
+    }).start(() => navigation.replace("onboardingScreen"));
+    //);
   };
 
   return (

@@ -16,6 +16,7 @@ import { useValidEmail } from "./useValidEmail";
 import { useValidPassword } from "./useValidPassword";
 import { THEME } from "../../theme";
 import { signUpUser } from "../../../firebase";
+import { CommonActions } from "@react-navigation/native";
 import WelcomeMessage from "../../components/WelcomeMessage";
 import Input from "../../components/Input";
 import NavigationButton from "../../components/NavigationButton";
@@ -62,7 +63,12 @@ const SignUpScreen = ({ navigation }) => {
     const request = await signUpUser(newUser);
 
     if (request.status === "success") {
-      alert("New user added");
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{ name: "BottomTabsStack" }],
+        })
+      );
     } else {
       alert(request.errorMessade);
     }

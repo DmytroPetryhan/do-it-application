@@ -15,6 +15,7 @@ import { useValidEmail } from "../SignUpScreen/useValidEmail";
 import { useValidPassword } from "../SignUpScreen/useValidPassword";
 import { THEME } from "../../theme";
 import { signInUser } from "../../../firebase";
+import { CommonActions } from "@react-navigation/native";
 import WelcomeMessage from "../../components/WelcomeMessage";
 import Input from "../../components/Input";
 import NavigationButton from "../../components/NavigationButton";
@@ -57,7 +58,12 @@ const SignInScreen = ({ navigation }) => {
     const request = await signInUser(findUser);
 
     if (request.status === "success") {
-      alert("User was finded");
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{ name: "BottomTabsStack" }],
+        })
+      );
     } else {
       alert(request.errorMessade);
     }

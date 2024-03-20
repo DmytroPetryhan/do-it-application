@@ -1,11 +1,11 @@
 import React, { useState, useRef } from "react";
-import { StyleSheet, FlatList, View, Dimensions } from "react-native";
+import { FlatList, View } from "react-native";
 import { onboardingData } from "../../data/onboardingData";
+import { AntDesign } from "@expo/vector-icons";
 import styles from "./OnboardingScreenStyles";
 import OnboardingCarusel from "../../components/OnboardingCarusel";
 import Paginator from "../../components/Paginator";
 import OnboardButton from "../../components/OnboardButton";
-import { AntDesign } from "@expo/vector-icons";
 import GradientContainer from "../../components/GradientContainer";
 
 const OnboardingScreen = ({ navigation }) => {
@@ -29,7 +29,7 @@ const OnboardingScreen = ({ navigation }) => {
     if (currentIndex < swipeLength) {
       flatListRef.current.scrollToIndex({ index: currentIndex + 1 });
     } else {
-      navigation.navigate("signInScreen");
+      navigation.replace("signInScreen");
     }
   };
 
