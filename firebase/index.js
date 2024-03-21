@@ -24,15 +24,16 @@ export const signUpUser = async (user) => {
       userEmail,
       userPassword,
       onBoarding: true,
-      items: [1, 2],
+      items: {},
     });
+
     return {
-      status: "success",
-      newUser: await newUser,
+      status: (await newUser).status,
+      userId: (await newUser).data.name,
     };
   } catch (error) {
     return {
-      status: "fail",
+      status: (await newUser).status,
       errorMessade: error,
     };
   }
@@ -42,18 +43,19 @@ export const signInUser = async (userData) => {
   const { userEmail, userPassword } = userData;
   const users = await allUsersList();
 
-  const user = users.filter(
+  const user = users.find(
     (user) => user.userEmail === userEmail && user.userPassword === userPassword
   );
-  if (user.length) {
+
+  if (user !== undefined) {
     return {
-      status: "success",
+      status: 200,
       newUser: user,
     };
   } else {
     return {
       status: "fail",
-      errorMessade: "Incorrect email or password",
+      errorMessade: "No user found with this email address or password",
     };
   }
 };
