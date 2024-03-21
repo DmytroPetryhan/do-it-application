@@ -17,6 +17,8 @@ import { useValidPassword } from "./useValidPassword";
 import { THEME } from "../../theme";
 import { signUpUser } from "../../../firebase";
 import { CommonActions } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
+import { addUser } from "../../store/userSlice";
 import WelcomeMessage from "../../components/WelcomeMessage";
 import Input from "../../components/Input";
 import NavigationButton from "../../components/NavigationButton";
@@ -31,6 +33,7 @@ const SignUpScreen = ({ navigation }) => {
   const [userEmail, setUserEmail] = useState("");
   const [errors, setErrors] = useState({});
   const [disableButton, setDisableButton] = useState(true);
+  const dispatch = useDispatch();
 
   const hideKeyboard = () => Keyboard.dismiss();
   const { height } = useWindowDimensions();
@@ -61,8 +64,8 @@ const SignUpScreen = ({ navigation }) => {
       items: {},
     };
     const request = await signUpUser(newUser);
-
-    if (request.status === "success") {
+    if (request.status === 200) {
+      dispatch(addUser({ ...newUser, id: request.userId }));
       navigation.dispatch(
         CommonActions.reset({
           index: 0,
