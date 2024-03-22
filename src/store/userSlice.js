@@ -24,4 +24,5 @@ export const {
   changeItem,
   toggleIsDone,
   toggleIsOnboarded,
+  cleareStore,
 } = userSlice.actions;
