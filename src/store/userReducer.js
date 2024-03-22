@@ -1,6 +1,10 @@
 export const userReducer = {
   addUser: (state, actions) => {
-    return { ...state, user: { ...actions.payload } };
+    return {
+      ...state,
+      user: { ...actions.payload },
+      token: actions.payload.id,
+    };
   },
   addItem: (state, actions) => {
     return state;
@@ -17,5 +21,8 @@ export const userReducer = {
   },
   toggleIsOnboarded: (state, actions) => {
     return { ...state, isOnboarded: actions.payload };
+  },
+  cleareStore: (state, actions) => {
+    return { token: null, isOnboarded: false, loader: false, user: {} };
   },
 };
