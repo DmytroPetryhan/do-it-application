@@ -15,4 +15,7 @@ export const userReducer = {
   toggleIsDone: (state, actions) => {
     return state;
   },
+  toggleIsOnboarded: (state, actions) => {
+    return { ...state, isOnboarded: actions.payload };
+  },
 };
