@@ -4,6 +4,7 @@ import { userReducer } from "./userReducer";
 export const userSlice = createSlice({
   name: "user",
   initialState: {
+    isOnboarded: false,
     loader: false,
     user: {},
   },

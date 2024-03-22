@@ -4,11 +4,12 @@ import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
 import { View } from "react-native";
 import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 import RootNavigation from "./src/navigation/RootNavigation";
 import SignUpScreen from "./src/screens/SignUpScreen";
 import SignInScreen from "./src/screens/SignInScreen";
 import HomePageScreen from "./src/screens/HomePageScreen";
-import store from "./src/store";
+import store, { persistor } from "./src/store";
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
@@ -30,9 +31,11 @@ export default function App() {
     <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
       <StatusBar style="light" />
       <Provider store={store}>
-        {/* <HomePageScreen /> */}
-        {/* <SignUpScreen /> */}
-        <RootNavigation />
+        <PersistGate loading={null} persistor={persistor}>
+          {/* <HomePageScreen /> */}
+          {/* <SignUpScreen /> */}
+          <RootNavigation />
+        </PersistGate>
       </Provider>
     </View>
   );

@@ -23,7 +23,6 @@ export const signUpUser = async (user) => {
       userName,
       userEmail,
       userPassword,
-      onBoarding: true,
       items: {},
     });
 
