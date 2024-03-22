@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { Text, View, Image, Animated } from "react-native";
+import { CommonActions } from "@react-navigation/native";
 import styles from "./TitleAppScreenStyles";
 import checkmark from "../../img/titleAppScreenImage/Checkmark.png";
 import GradientContainer from "../../components/GradientContainer";
@@ -23,8 +24,14 @@ export default function TitleAppScreen({ navigation }) {
       toValue: 0,
       duration: 2000,
       useNativeDriver: true,
-    }).start(() => navigation.replace("onboardingScreen"));
-    //);
+    }).start(() =>
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{ name: "onboardingScreen" }],
+        })
+      )
+    );
   };
 
   return (

@@ -1,6 +1,10 @@
 export const userReducer = {
   addUser: (state, actions) => {
-    return { ...state, user: { ...actions.payload } };
+    return {
+      ...state,
+      user: { ...actions.payload },
+      token: actions.payload.id,
+    };
   },
   addItem: (state, actions) => {
     return state;

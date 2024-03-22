@@ -1,23 +1,32 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import PrimaryInformationStack from "./PrimaryInformationStack";
+import AuthUserStack from "./AuthUserStack";
 import BottomTabsStack from "./BottomTabsStack";
-
+import { useSelector } from "react-redux";
+import { isOnboarded, userToken } from "../store/userSlice";
 const MainGroup = createNativeStackNavigator();
 
-const isOnboard = false;
-const initialScreen = isOnboard ? "BottomTabsStack" : "PrimaryInformationStack";
-
 const MainGroupStack = () => {
+  const isOnboard = useSelector(isOnboarded);
+  const token = useSelector(userToken);
+
   return (
-    <MainGroup.Navigator
-      initialRouteName={initialScreen}
-      screenOptions={{ headerShown: false }}
-    >
-      <MainGroup.Screen
-        name="PrimaryInformationStack"
-        component={PrimaryInformationStack}
-      />
-      <MainGroup.Screen name="BottomTabsStack" component={BottomTabsStack} />
+    <MainGroup.Navigator screenOptions={{ headerShown: false }}>
+      {isOnboard ? (
+        token ? (
+          <MainGroup.Screen
+            name="BottomTabsStack"
+            component={BottomTabsStack}
+          />
+        ) : (
+          <MainGroup.Screen name="AuthUserStack" component={AuthUserStack} />
+        )
+      ) : (
+        <MainGroup.Screen
+          name="PrimaryInformationStack"
+          component={PrimaryInformationStack}
+        />
+      )}
     </MainGroup.Navigator>
   );
 };

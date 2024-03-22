@@ -4,6 +4,7 @@ import { userReducer } from "./userReducer";
 export const userSlice = createSlice({
   name: "user",
   initialState: {
+    token: null,
     isOnboarded: false,
     loader: false,
     user: {},
@@ -11,7 +12,16 @@ export const userSlice = createSlice({
   reducers: userReducer,
 });
 
-export const profile = (state) => state.user;
+export const profile = (state) => state.userReducer.user;
+export const isOnboarded = (state) => state.userReducer.isOnboarded;
+export const userToken = (state) => state.userReducer.token;
+
 export default userSlice.reducer;
-export const { addUser, addItem, removeItem, changeItem, toggleIsDone } =
-  userSlice.actions;
+export const {
+  addUser,
+  addItem,
+  removeItem,
+  changeItem,
+  toggleIsDone,
+  toggleIsOnboarded,
+} = userSlice.actions;

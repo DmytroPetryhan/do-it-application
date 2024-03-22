@@ -1,8 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import TitleAppScreen from "../screens/TitleAppScreen/";
 import OnboardingScreen from "../screens/OnboardingScreen";
-import SignInScreen from "../screens/SignInScreen";
-import SignUpScreen from "../screens/SignUpScreen";
 
 const PrimaryInformationNavigation = createNativeStackNavigator();
 
@@ -21,15 +19,6 @@ const PrimaryInformationStack = () => {
       <PrimaryInformationNavigation.Screen
         name="onboardingScreen"
         component={OnboardingScreen}
-      />
-      <PrimaryInformationNavigation.Screen
-        name="signInScreen"
-        component={SignInScreen}
-      />
-
-      <PrimaryInformationNavigation.Screen
-        name="signUpScreen"
-        component={SignUpScreen}
       />
     </PrimaryInformationNavigation.Navigator>
   );

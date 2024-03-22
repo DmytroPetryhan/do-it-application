@@ -7,8 +7,11 @@ import OnboardingCarusel from "../../components/OnboardingCarusel";
 import Paginator from "../../components/Paginator";
 import OnboardButton from "../../components/OnboardButton";
 import GradientContainer from "../../components/GradientContainer";
+import { useDispatch } from "react-redux";
+import { toggleIsOnboarded } from "../../store/userSlice";
 
-const OnboardingScreen = ({ navigation }) => {
+const OnboardingScreen = () => {
+  const dispatch = useDispatch();
   const swipeLength = onboardingData.length - 1;
   const [currentIndex, setCurrentIndex] = useState(0);
   const flatListRef = useRef();
@@ -29,7 +32,7 @@ const OnboardingScreen = ({ navigation }) => {
     if (currentIndex < swipeLength) {
       flatListRef.current.scrollToIndex({ index: currentIndex + 1 });
     } else {
-      navigation.replace("signInScreen");
+      dispatch(toggleIsOnboarded(true));
     }
   };
 
