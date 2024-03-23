@@ -6,9 +6,6 @@ import { View } from "react-native";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import RootNavigation from "./src/navigation/RootNavigation";
-import SignUpScreen from "./src/screens/SignUpScreen";
-import SignInScreen from "./src/screens/SignInScreen";
-import HomePageScreen from "./src/screens/HomePageScreen";
 import store, { persistor } from "./src/store";
 SplashScreen.preventAutoHideAsync();
 
@@ -33,8 +30,6 @@ export default function App() {
       <StatusBar style="light" />
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          {/* <HomePageScreen /> */}
-          {/* <SignUpScreen /> */}
           <RootNavigation />
         </PersistGate>
       </Provider>

@@ -4,6 +4,7 @@ import AuthUserStack from "./AuthUserStack";
 import BottomTabsStack from "./BottomTabsStack";
 import { useSelector } from "react-redux";
 import { isOnboarded, userToken } from "../store/userSlice";
+
 const MainGroup = createNativeStackNavigator();
 
 const MainGroupStack = () => {

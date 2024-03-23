@@ -15,6 +15,7 @@ export const userSlice = createSlice({
 export const profile = (state) => state.userReducer.user;
 export const isOnboarded = (state) => state.userReducer.isOnboarded;
 export const userToken = (state) => state.userReducer.token;
+export const loader = (state) => state.userReducer.loader;
 
 export default userSlice.reducer;
 export const {
@@ -25,4 +26,5 @@ export const {
   toggleIsDone,
   toggleIsOnboarded,
   cleareStore,
+  toggleLoader,
 } = userSlice.actions;
