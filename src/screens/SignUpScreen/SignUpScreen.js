@@ -18,7 +18,7 @@ import { THEME } from "../../theme";
 import { signUpUser } from "../../../firebase";
 import { CommonActions } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
-import { addUser } from "../../store/userSlice";
+import { addUser, toggleLoader } from "../../store/userSlice";
 import WelcomeMessage from "../../components/WelcomeMessage";
 import Input from "../../components/Input";
 import NavigationButton from "../../components/NavigationButton";
@@ -57,6 +57,7 @@ const SignUpScreen = ({ navigation }) => {
   };
 
   const submitForm = async () => {
+    dispatch(toggleLoader(true));
     const newUser = {
       userName,
       userEmail,
@@ -66,15 +67,10 @@ const SignUpScreen = ({ navigation }) => {
     const request = await signUpUser(newUser);
     if (request.status === 200) {
       dispatch(addUser({ ...newUser, id: request.userId }));
-      navigation.dispatch(
-        CommonActions.reset({
-          index: 0,
-          routes: [{ name: "BottomTabsStack" }],
-        })
-      );
     } else {
       alert(request.errorMessade);
     }
+    dispatch(toggleLoader(false));
   };
   return (
     <GradientContainer>

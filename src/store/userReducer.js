@@ -25,4 +25,7 @@ export const userReducer = {
   cleareStore: (state, actions) => {
     return { token: null, isOnboarded: false, loader: false, user: {} };
   },
+  toggleLoader: (state, actions) => {
+    return { ...state, loader: actions.payload };
+  },
 };
