@@ -4,7 +4,7 @@ import HomePageScreen from "../screens/HomePageScreen";
 import TaskPageScreen from "../screens/TasksPageScreen";
 import GradientContainer from "../components/GradientContainer";
 import SettingsScreen from "../screens/SettingsScreen";
-import { Platform } from "react-native";
+import { Platform, SafeAreaView, View } from "react-native";
 import { THEME } from "../theme";
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
@@ -45,6 +45,7 @@ function BottomTabsStack() {
   return (
     <GradientContainer>
       <BottomNavigator.Navigator
+        style={{ marginBottom: 0 }}
         {...getNavigationOptions()}
         initialRouteName="Home"
       >

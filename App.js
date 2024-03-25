@@ -14,6 +14,7 @@ export default function App() {
   const [fontsLoaded, fontError] = useFonts({
     "darumadrop-one": require("./assets/fonts/DarumadropOne-Regular.ttf"),
     "poppins-regular": require("./assets/fonts/Poppins-Regular.ttf"),
+    "poppins-bold": require("./assets/fonts/Poppins-Bold.ttf"),
   });
 
   const onLayoutRootView = useCallback(async () => {

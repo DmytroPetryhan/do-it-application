@@ -1,17 +1,19 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { View, SafeAreaView } from "react-native";
 import styles from "./HomePageScreenStyles";
 import { profile } from "../../store/userSlice";
 import { useSelector } from "react-redux";
+import UserInfo from "../../components/UserInfo/UserInfo";
 
 const HomePageScreen = () => {
   const user = useSelector(profile);
   const items = user.items || [];
-
   return (
-    <View style={styles.container}>
-      <Text>{user.userName}</Text>
-    </View>
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
+        <UserInfo name={user.userName} email={user.userEmail} />
+      </View>
+    </SafeAreaView>
   );
 };
 
