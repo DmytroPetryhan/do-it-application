@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import RootNavigation from "./src/navigation/RootNavigation";
 import store, { persistor } from "./src/store";
+import HomePageScreen from "./src/screens/HomePageScreen";
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
@@ -30,6 +31,7 @@ export default function App() {
       <StatusBar style="light" />
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
+          {/* <HomePageScreen /> */}
           <RootNavigation />
         </PersistGate>
       </Provider>

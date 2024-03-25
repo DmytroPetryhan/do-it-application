@@ -1,3 +1,3 @@
-import HomePageScreen from "./NomePageScreen";
+import HomePageScreen from "./HomePageScreen";
 
 export default HomePageScreen;
