@@ -29,6 +29,11 @@ const styles = StyleSheet.create({
       height: 3,
     },
   },
+  userIcon: {
+    borderRadius: 30,
+    width: 60,
+    height: 60,
+  },
 });
 
 export default styles;
