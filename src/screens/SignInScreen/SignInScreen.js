@@ -15,7 +15,6 @@ import { useValidEmail } from "../SignUpScreen/useValidEmail";
 import { useValidPassword } from "../SignUpScreen/useValidPassword";
 import { THEME } from "../../theme";
 import { signInUser } from "../../../firebase";
-import { CommonActions } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 import { addUser, toggleLoader } from "../../store/userSlice";
 import WelcomeMessage from "../../components/WelcomeMessage";

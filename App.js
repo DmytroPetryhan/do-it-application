@@ -7,12 +7,14 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import RootNavigation from "./src/navigation/RootNavigation";
 import store, { persistor } from "./src/store";
+import HomePageScreen from "./src/screens/HomePageScreen";
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   const [fontsLoaded, fontError] = useFonts({
     "darumadrop-one": require("./assets/fonts/DarumadropOne-Regular.ttf"),
     "poppins-regular": require("./assets/fonts/Poppins-Regular.ttf"),
+    "poppins-bold": require("./assets/fonts/Poppins-Bold.ttf"),
   });
 
   const onLayoutRootView = useCallback(async () => {
@@ -30,6 +32,7 @@ export default function App() {
       <StatusBar style="light" />
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
+          {/* <HomePageScreen /> */}
           <RootNavigation />
         </PersistGate>
       </Provider>
