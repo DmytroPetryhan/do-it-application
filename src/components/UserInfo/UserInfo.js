@@ -1,12 +1,12 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, Image } from "react-native";
 import styles from "./UserInfoStyles";
-import { FontAwesome } from "@expo/vector-icons";
+import usIcon from "../../img/UserIcon/usIcon.png";
 
 const UserInfo = ({ name, email }) => {
   return (
     <View style={styles.container}>
-      <FontAwesome name="user-circle" size={60} color="grey" />
+      <Image style={styles.userIcon} source={usIcon} />
       <View style={styles.userInfo}>
         <Text style={styles.nameText}>{name}</Text>
         <Text style={styles.emailText}>{email}</Text>
