@@ -1,12 +1,7 @@
 import { api } from "../API";
 
 export const signUpUser = async (user) => {
-  const {
-    userName,
-    userEmail,
-    userPassword,
-    items: {},
-  } = user;
+  const { userName, userEmail, userPassword, items } = user;
 
   const users = await allUsersList();
 
@@ -23,7 +18,7 @@ export const signUpUser = async (user) => {
       userName,
       userEmail,
       userPassword,
-      items: {},
+      items,
     });
 
     return {
