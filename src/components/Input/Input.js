@@ -26,7 +26,7 @@ const Input = (props) => {
   );
 
   return (
-    <View>
+    <>
       <View style={[styles.container, { borderColor: activeBorderColor }]}>
         <Ionicons name={image} size={26} color={"black"} />
         <TextInput
@@ -45,7 +45,7 @@ const Input = (props) => {
         />
       </View>
       {focus && value ? <ErrorMessage message={errorMessage} /> : null}
-    </View>
+    </>
   );
 };
 

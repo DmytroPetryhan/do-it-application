@@ -17,6 +17,10 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: Platform.OS === "android" ? 40 : 0,
   },
+  selectSearchWrapper: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
 });
 
 export default styles;

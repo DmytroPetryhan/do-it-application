@@ -9,17 +9,17 @@ import styles from "./LoaderStyles";
 const Loader = () => {
   const loadind = useSelector(loader);
 
-  if (loadind) {
-    return (
-      <View style={styles.container}>
-        <ActivityIndicator
-          style={styles.indicator}
-          size="large"
-          color={THEME.LOADER}
-        />
-      </View>
-    );
-  }
+  if (!loadind) return;
+
+  return (
+    <View style={styles.container}>
+      <ActivityIndicator
+        style={styles.indicator}
+        size="large"
+        color={THEME.LOADER}
+      />
+    </View>
+  );
 };
 
 export default Loader;

@@ -1,10 +1,11 @@
 import { StyleSheet, Dimensions } from "react-native";
 import { THEME } from "../../theme";
 const { width } = Dimensions.get("window");
-
 const styles = StyleSheet.create({
   container: {
-    padding: 15,
+    width: width - 200,
+    height: 45,
+    padding: 10,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
@@ -13,15 +14,14 @@ const styles = StyleSheet.create({
     backgroundColor: THEME.SEARCH_INPUT_BACKGROUNDCOLOR,
   },
   input: {
-    width: width - 100,
     color: THEME.WHITE_COLOR,
-    opacity: 0.5,
-    fontSize: 18,
-    letterSpacing: 1,
+    opacity: 0.6,
+    fontSize: 16,
+    fontFamily: "poppins-regular",
     includeFontPadding: false,
   },
   icon: {
-    opacity: 0.5,
+    opacity: 0.6,
   },
 });
 

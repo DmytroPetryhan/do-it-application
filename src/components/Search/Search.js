@@ -10,7 +10,7 @@ const Search = ({ onChangeText }) => {
       <TextInput
         autoCorrect={false}
         style={styles.input}
-        maxLength={30}
+        maxLength={20}
         placeholder="Search by task title"
         placeholderTextColor={THEME.WHITE_TEXT_COLOR}
         onChangeText={onChangeText}
@@ -18,7 +18,7 @@ const Search = ({ onChangeText }) => {
       <FontAwesome
         style={styles.icon}
         name="search"
-        size={24}
+        size={22}
         color={THEME.WHITE_COLOR}
       />
     </View>

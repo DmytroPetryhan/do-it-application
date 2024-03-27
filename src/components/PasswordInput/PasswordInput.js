@@ -20,7 +20,7 @@ const PasswordInput = (props) => {
     debounce((text) => onChangeText(text), 500)
   );
   return (
-    <View>
+    <>
       <View style={[styles.container, { borderColor: activeBorderColor }]}>
         <Ionicons name={"lock-closed"} size={26} color={"black"} />
         <TextInput
@@ -51,7 +51,7 @@ const PasswordInput = (props) => {
         </Pressable>
       </View>
       {focus && value ? <ErrorMessage message={errorMessage} /> : null}
-    </View>
+    </>
   );
 };
 
