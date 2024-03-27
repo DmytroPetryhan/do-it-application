@@ -2,6 +2,7 @@ import { StyleSheet } from "react-native";
 import { THEME } from "../../theme";
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: "red",
     height: 70,
     width: 70,
     borderRadius: 35,

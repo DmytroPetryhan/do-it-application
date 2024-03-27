@@ -5,7 +5,7 @@ import { AntDesign } from "@expo/vector-icons";
 import styles from "./OnboardingScreenStyles";
 import OnboardingCarusel from "../../components/OnboardingCarusel";
 import Paginator from "../../components/Paginator";
-import OnboardButton from "../../components/OnboardButton";
+import CommonButton from "../../components/CommonButton";
 import GradientContainer from "../../components/GradientContainer";
 import { useDispatch } from "react-redux";
 import { toggleIsOnboarded } from "../../store/userSlice";
@@ -57,7 +57,7 @@ const OnboardingScreen = () => {
       />
       <View style={styles.bottomContainer}>
         <Paginator data={onboardingData} caruselIndex={currentIndex} />
-        <OnboardButton onPress={buttonHandler}>{icon}</OnboardButton>
+        <CommonButton onPress={buttonHandler}>{icon}</CommonButton>
       </View>
     </GradientContainer>
   );

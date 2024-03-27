@@ -4,10 +4,14 @@ import { Entypo } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import styles from "./ItemCartStyle";
 
-const ItemCart = ({ item, onPress }) => {
+const ItemCart = ({ item, onPress, onLongPress }) => {
   const { title, completed } = item;
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      onPress={onPress}
+      onLongPress={onLongPress}
+      style={styles.container}
+    >
       <View style={styles.contentWrap}>
         {completed ? (
           <View style={styles.iconCompleted}>
@@ -16,10 +20,8 @@ const ItemCart = ({ item, onPress }) => {
         ) : null}
         <Text style={styles.title}>{title}</Text>
       </View>
-      <TouchableOpacity onPress={onPress}>
-        <Entypo name="chevron-right" size={25} color="#0EA5E9" />
-      </TouchableOpacity>
-    </View>
+      <Entypo name="chevron-right" size={25} color="#0EA5E9" />
+    </TouchableOpacity>
   );
 };
 

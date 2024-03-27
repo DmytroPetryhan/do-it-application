@@ -1,6 +1,6 @@
 import React from "react";
 import { View, TouchableOpacity } from "react-native";
-import styles from "./OnboardButtonStyle";
+import styles from "./CommonButtonStyle";
 
 const OnboardButton = ({ children, style, onPress }) => {
   return (
