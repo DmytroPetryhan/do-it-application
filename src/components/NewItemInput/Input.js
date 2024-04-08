@@ -1,11 +1,17 @@
 import { View, TextInput } from "react-native";
-import React from "react";
+import React, { useCallback } from "react";
+import { debounce } from "lodash";
 import styles from "./InputStyles";
 import { THEME } from "../../theme";
 import Icon from "react-native-vector-icons/Feather";
 
 const Input = (props) => {
-  const { placeholder, iconName, style, maxLength, multiline } = props;
+  const { placeholder, iconName, style, maxLength, multiline, onChangeText } =
+    props;
+
+  const debounceHandler = useCallback(
+    debounce((text) => onChangeText(text), 500)
+  );
 
   return (
     <View style={[styles.container, style]}>
@@ -13,11 +19,11 @@ const Input = (props) => {
       <TextInput
         autoCorrect={false}
         returnKeyType="done"
-        //returnKeyLabel="done"
         maxLength={maxLength}
         multiline={multiline}
         placeholder={placeholder}
         placeholderTextColor={THEME.WHITE_TEXT_COLOR}
+        onChangeText={debounceHandler}
         style={styles.text}
       />
     </View>

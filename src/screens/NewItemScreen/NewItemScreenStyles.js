@@ -8,12 +8,16 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     backgroundColor: THEME.WHITE_COLOR,
-    rowGap: 30,
+    rowGap: 20,
+  },
+  buttonDateWrap: {
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   buttonWrap: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: Platform.OS === "ios" ? 30 : 0,
+    marginBottom: Platform.OS === "ios" ? 20 : 0,
   },
 });
 
