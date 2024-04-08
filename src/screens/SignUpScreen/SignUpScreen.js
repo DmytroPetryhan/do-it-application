@@ -25,12 +25,15 @@ import Button from "../../components/Button/Button";
 import PasswordInput from "../../components/PasswordInput/PasswordInput";
 import styles from "./SignUpScreenStyles";
 import GradientContainer from "../../components/GradientContainer";
+import useSigUpScreenLogic from "./hooks/index";
 
 const SignUpScreen = ({ navigation }) => {
   const [userName, setUserName] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [errors, setErrors] = useState({});
+  //const {} = useSigUpScreenLogic();
+
   const [disableButton, setDisableButton] = useState(true);
   const dispatch = useDispatch();
 
@@ -50,7 +53,6 @@ const SignUpScreen = ({ navigation }) => {
     if (!useValidEmail(userEmail.trim())) errors.userEmail = "Incorrect E-mail";
     if (!useValidPassword(userPassword.trim()))
       errors.userPassword = "Incorrect password";
-
     setErrors(errors);
     return Object.keys(errors).length !== 0;
   };
@@ -62,97 +64,97 @@ const SignUpScreen = ({ navigation }) => {
       userEmail,
       userPassword,
       items: [
-        {
-          title: "1 Do It",
-          id: 0,
-          completed: false,
-          description:
-            "0 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Netus et malesuada fames ac turpis egestas maecenas. ",
-        },
-        {
-          title: "2 Do It",
-          id: 1,
-          completed: false,
-          description:
-            "1 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Netus et malesuada fames ac turpis egestas maecenas. ",
-        },
-        {
-          title: "3 Do It",
-          id: 2,
-          completed: true,
-          description:
-            "2 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Netus et malesuada fames ac turpis egestas maecenas. ",
-        },
-        {
-          title: "4 Do It",
-          id: 3,
-          completed: false,
-          description:
-            "3 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Netus et malesuada fames ac turpis egestas maecenas. ",
-        },
-        {
-          title: "5 Do It",
-          id: 4,
-          completed: false,
-          description:
-            "4 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Netus et malesuada fames ac turpis egestas maecenas. ",
-        },
-        {
-          title: "6 Do It",
-          id: 5,
-          completed: true,
-          description:
-            "5 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Netus et malesuada fames ac turpis egestas maecenas. ",
-        },
-        {
-          title: "7 Do It",
-          id: 6,
-          completed: false,
-          description:
-            "5 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Netus et malesuada fames ac turpis egestas maecenas. ",
-        },
-        {
-          title: "8 Do It",
-          id: 7,
-          completed: true,
-          description:
-            "5 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Netus et malesuada fames ac turpis egestas maecenas. ",
-        },
-        {
-          title: "9 Do It",
-          id: 8,
-          completed: false,
-          description:
-            "5 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Netus et malesuada fames ac turpis egestas maecenas. ",
-        },
-        {
-          title: "10 Do It",
-          id: 9,
-          completed: true,
-          description:
-            "5 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Netus et malesuada fames ac turpis egestas maecenas. ",
-        },
-        {
-          title: "11 Do It",
-          id: 10,
-          completed: false,
-          description:
-            "5 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Netus et malesuada fames ac turpis egestas maecenas. ",
-        },
-        {
-          title: "12 Do It",
-          id: 11,
-          completed: true,
-          description:
-            "5 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Netus et malesuada fames ac turpis egestas maecenas. ",
-        },
-        {
-          title: "13 Do It",
-          id: 12,
-          completed: true,
-          description:
-            "5 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Netus et malesuada fames ac turpis egestas maecenas. ",
-        },
+        // {
+        //   title: "1 Do It",
+        //   id: 0,
+        //   completed: false,
+        //   description:
+        //     "0 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Netus et malesuada fames ac turpis egestas maecenas. ",
+        // },
+        // {
+        //   title: "2 Do It",
+        //   id: 1,
+        //   completed: false,
+        //   description:
+        //     "1 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Netus et malesuada fames ac turpis egestas maecenas. ",
+        // },
+        // {
+        //   title: "3 Do It",
+        //   id: 2,
+        //   completed: true,
+        //   description:
+        //     "2 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Netus et malesuada fames ac turpis egestas maecenas. ",
+        // },
+        // {
+        //   title: "4 Do It",
+        //   id: 3,
+        //   completed: false,
+        //   description:
+        //     "3 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Netus et malesuada fames ac turpis egestas maecenas. ",
+        // },
+        // {
+        //   title: "5 Do It",
+        //   id: 4,
+        //   completed: false,
+        //   description:
+        //     "4 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Netus et malesuada fames ac turpis egestas maecenas. ",
+        // },
+        // {
+        //   title: "6 Do It",
+        //   id: 5,
+        //   completed: true,
+        //   description:
+        //     "5 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Netus et malesuada fames ac turpis egestas maecenas. ",
+        // },
+        // {
+        //   title: "7 Do It",
+        //   id: 6,
+        //   completed: false,
+        //   description:
+        //     "5 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Netus et malesuada fames ac turpis egestas maecenas. ",
+        // },
+        // {
+        //   title: "8 Do It",
+        //   id: 7,
+        //   completed: true,
+        //   description:
+        //     "5 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Netus et malesuada fames ac turpis egestas maecenas. ",
+        // },
+        // {
+        //   title: "9 Do It",
+        //   id: 8,
+        //   completed: false,
+        //   description:
+        //     "5 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Netus et malesuada fames ac turpis egestas maecenas. ",
+        // },
+        // {
+        //   title: "10 Do It",
+        //   id: 9,
+        //   completed: true,
+        //   description:
+        //     "5 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Netus et malesuada fames ac turpis egestas maecenas. ",
+        // },
+        // {
+        //   title: "11 Do It",
+        //   id: 10,
+        //   completed: false,
+        //   description:
+        //     "5 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Netus et malesuada fames ac turpis egestas maecenas. ",
+        // },
+        // {
+        //   title: "12 Do It",
+        //   id: 11,
+        //   completed: true,
+        //   description:
+        //     "5 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Netus et malesuada fames ac turpis egestas maecenas. ",
+        // },
+        // {
+        //   title: "13 Do It",
+        //   id: 12,
+        //   completed: true,
+        //   description:
+        //     "5 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Netus et malesuada fames ac turpis egestas maecenas. ",
+        // },
       ],
     };
     const request = await signUpUser(newUser);

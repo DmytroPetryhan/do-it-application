@@ -28,6 +28,8 @@ const styles = StyleSheet.create({
   },
 
   dropdownMenuStyle: {
+    borderWidth: 2,
+    borderColor: THEME.WHITE_COLOR,
     backgroundColor: THEME.SELECT_DROPDOWN_MENU_COLOR,
     borderRadius: 8,
   },

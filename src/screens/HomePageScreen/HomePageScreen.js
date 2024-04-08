@@ -19,8 +19,12 @@ const HomePageScreen = () => {
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
         <UserInfo name={user.userName} email={user.userEmail} />
-        <List title="Incomplate Tasks" list={incompletedItems} />
-        <List title="Complate Tasks" list={completedItems} />
+        {incompletedItems.length ? (
+          <List title="Incomplate Tasks" list={incompletedItems} />
+        ) : null}
+        {completedItems.length ? (
+          <List title="Complate Tasks" list={completedItems} />
+        ) : null}
       </View>
     </SafeAreaView>
   );

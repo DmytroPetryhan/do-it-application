@@ -7,9 +7,8 @@ import { loader } from "../../store/userSlice";
 import styles from "./LoaderStyles";
 
 const Loader = () => {
-  const loadind = useSelector(loader);
-
-  if (!loadind) return;
+  const loading = useSelector(loader);
+  if (!loading) return;
 
   return (
     <View style={styles.container}>
