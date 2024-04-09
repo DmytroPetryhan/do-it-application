@@ -6,8 +6,15 @@ import { THEME } from "../../theme";
 import Icon from "react-native-vector-icons/Feather";
 
 const Input = (props) => {
-  const { placeholder, iconName, style, maxLength, multiline, onChangeText } =
-    props;
+  const {
+    placeholder,
+    iconName,
+    style,
+    maxLength,
+    multiline,
+    onChangeText,
+    ...rest
+  } = props;
 
   const debounceHandler = useCallback(
     debounce((text) => onChangeText(text), 500)
@@ -25,6 +32,7 @@ const Input = (props) => {
         placeholderTextColor={THEME.WHITE_TEXT_COLOR}
         onChangeText={debounceHandler}
         style={styles.text}
+        {...rest}
       />
     </View>
   );
