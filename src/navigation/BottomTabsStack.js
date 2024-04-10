@@ -73,9 +73,11 @@ function BottomTabsStack() {
         />
         <BottomNavigator.Screen
           options={{
+            headerTintColor: THEME.WHITE_TEXT_COLOR,
             headerTitle: "Settings",
             title: "Settings",
             headerShown: true,
+            headerTitleStyle: { fontSize: 25, fontFamily: "poppins-regular" },
             tabBarIcon: ({ color }) => (
               <Ionicons name="settings-sharp" size={24} color={color} />
             ),

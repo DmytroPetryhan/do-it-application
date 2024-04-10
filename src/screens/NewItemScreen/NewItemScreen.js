@@ -1,18 +1,11 @@
 import React, { useState } from "react";
-import {
-  Text,
-  View,
-  KeyboardAvoidingView,
-  Platform,
-  TouchableOpacity,
-} from "react-native";
+import { View, KeyboardAvoidingView, Platform } from "react-native";
 import styles from "./NewItemScreenStyles";
 import { useIsFocused } from "@react-navigation/native";
 import { THEME } from "../../theme";
 import Input from "../../components/NewItemInput";
 import Button from "../../components/NewItemButton";
 import DateTimeSelectorButton from "../../components/DateTimeSelectorButton";
-import DateTimePicker from "@react-native-community/datetimepicker";
 import DateTimeSelect from "../../components/DateTimeSelect";
 
 const NewItemScreen = (props) => {
