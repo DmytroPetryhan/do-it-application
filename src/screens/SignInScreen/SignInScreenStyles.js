@@ -30,6 +30,11 @@ const styles = StyleSheet.create({
   forgetPassworButton: {
     alignItems: "flex-end",
   },
+  navigationButton: {
+    borderBottomWidth: 0.5,
+    borderBottomColor: THEME.WHITE_COLOR,
+    marginVertical: 30,
+  },
 });
 
 export default styles;

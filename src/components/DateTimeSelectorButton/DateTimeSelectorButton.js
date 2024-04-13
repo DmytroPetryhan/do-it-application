@@ -5,7 +5,8 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { THEME } from "../../theme";
 
 const DateTimeSelectorButton = (props) => {
-  const { title, onPress, style, textStyle, iconName } = props;
+  const { title, onPress, style, textStyle, iconName, value } = props;
+  const buttonTitle = value || title;
   return (
     <TouchableOpacity style={[styles.container, style]} onPress={onPress}>
       <Icon
@@ -14,7 +15,7 @@ const DateTimeSelectorButton = (props) => {
         color={THEME.WHITE_COLOR}
         style={styles.icon}
       />
-      <Text style={[styles.titleButton, textStyle]}>{title}</Text>
+      <Text style={[styles.titleButton, textStyle]}>{buttonTitle}</Text>
     </TouchableOpacity>
   );
 };

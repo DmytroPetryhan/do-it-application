@@ -5,7 +5,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    //justifyContent: "space-around",
   },
   textWrap: {
     flex: 0.7,

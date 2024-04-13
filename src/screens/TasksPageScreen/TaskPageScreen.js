@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { SafeAreaView, View, Touchable } from "react-native";
+import { SafeAreaView, View } from "react-native";
 import styles from "./TaskPageScreenStyles";
 import List from "../../components/List";
 import CommonButton from "../../components/CommonButton";
@@ -8,6 +8,8 @@ import { THEME } from "../../theme";
 import Search from "../../components/Search";
 import Select from "../../components/Select";
 import NewItemScreen from "../NewItemScreen";
+import { useSelector } from "react-redux";
+import { userItems } from "../../store/userSlice";
 import {
   BottomSheetModal,
   BottomSheetModalProvider,
@@ -15,6 +17,7 @@ import {
 } from "@gorhom/bottom-sheet";
 
 const TaskPageScreen = () => {
+  const allItemsList = useSelector(userItems);
   const bottomSheetModalRef = useRef(null);
   const [items, setItems] = useState([]);
   const [filterText, setFilterText] = useState("");
@@ -59,7 +62,7 @@ const TaskPageScreen = () => {
 
           <View style={styles.selectSearchWrapper}>
             <Search onChangeText={setFilterText} />
-            <Select items={items} onSelect={setItems} />
+            <Select items={allItemsList} onSelect={setItems} />
           </View>
 
           <List title={"Task List"} list={filteredList} />

@@ -60,7 +60,7 @@ const SignInScreen = ({ navigation }) => {
     };
     const request = await signInUser(findUser);
     if (request.status === 200) {
-      dispatch(addUser(request.newUser));
+      dispatch(addUser({ id: request.userId }));
     } else {
       alert(request.errorMessade);
     }
@@ -110,11 +110,7 @@ const SignInScreen = ({ navigation }) => {
             </View>
             <View style={styles.forgetPassworButton}>
               <NavigationButton
-                style={{
-                  borderBottomWidth: 0.5,
-                  borderBottomColor: THEME.WHITE_COLOR,
-                  marginVertical: 30,
-                }}
+                style={styles.navigationButton}
                 title={"forget password?"}
                 textColor={THEME.WHITE_TEXT_COLOR}
                 onPress={remindPassword}
