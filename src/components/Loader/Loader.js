@@ -1,5 +1,4 @@
 import React from "react";
-import GradientContainer from "../GradientContainer";
 import { ActivityIndicator, View } from "react-native";
 import { THEME } from "../../theme";
 import { useSelector } from "react-redux";

@@ -5,7 +5,7 @@ export const signUpUser = async (user) => {
 
   const users = await allUsersList();
 
-  const checkValidUser = users.filter((item) => item.userEmail === userEmail);
+  const checkValidUser = users.filter((u) => u.user.userEmail === userEmail);
 
   if (checkValidUser.length) {
     return {
@@ -15,12 +15,8 @@ export const signUpUser = async (user) => {
   }
   try {
     const newUser = api.post(".json", {
-      userName,
-      userEmail,
-      userPassword,
-      items,
+      user,
     });
-
     return {
       status: (await newUser).status,
       userId: (await newUser).data.name,
@@ -38,13 +34,13 @@ export const signInUser = async (userData) => {
   const users = await allUsersList();
 
   const user = users.find(
-    (user) => user.userEmail === userEmail && user.userPassword === userPassword
+    (u) =>
+      u.user.userEmail === userEmail && u.user.userPassword === userPassword
   );
-
   if (user !== undefined) {
     return {
       status: 200,
-      newUser: user,
+      userId: user.id,
     };
   } else {
     return {
@@ -64,5 +60,43 @@ const allUsersList = async () => {
     return users;
   } catch (error) {
     return [];
+  }
+};
+
+export const addNewItem = async (data) => {
+  const { userId, title, description, date, time, completed } = data;
+  try {
+    const newItem = api.post(`${userId}/items.json`, {
+      title,
+      description,
+      date,
+      time,
+      completed,
+    });
+    return {
+      status: (await newItem).status,
+      itemId: (await newItem).data.name,
+    };
+  } catch (error) {
+    return {
+      status: (await newItem).status,
+      errorMessade: error,
+    };
+  }
+};
+
+export const fetchUser = async (id) => {
+  try {
+    const request = api.get(`${id}.json`);
+    return {
+      user: (await request).data.user,
+      items: (await request).data.items || {},
+      status: (await request).status,
+    };
+  } catch (error) {
+    return {
+      status: (await request).status,
+      errorMessade: error,
+    };
   }
 };

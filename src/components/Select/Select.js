@@ -3,13 +3,10 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { Text, View } from "react-native";
 import styles from "./SelectStyles";
 import { THEME } from "../../theme";
-import { useSelector } from "react-redux";
-import { profile } from "../../store/userSlice";
+
 import { useEffect } from "react";
 
-const Select = ({ onSelect }) => {
-  const { items } = useSelector(profile);
-
+const Select = ({ onSelect, items }) => {
   const selectTitles = [
     { title: "All", item: items },
     { title: "Complet", item: items.filter((i) => i.completed === true) },
@@ -18,7 +15,7 @@ const Select = ({ onSelect }) => {
 
   useEffect(() => {
     onSelect(items);
-  }, []);
+  }, [items]);
 
   return (
     <View>
