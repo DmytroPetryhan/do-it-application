@@ -17,7 +17,9 @@ const DateTimeSelect = (props) => {
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate;
     setDate(currentDate);
+    if (Platform.OS === "android") handlerPicker();
   };
+
   const handlerPicker = () => {
     const d = date.toDateString().slice(4, 15);
     const t = `${date.getHours().toLocaleString()}:${date.getMinutes()}`;
