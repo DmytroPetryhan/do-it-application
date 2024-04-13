@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 10,
     width: width / 2,
-    borderRadius: "50%",
+    borderRadius: width / 4,
     backgroundColor: THEME.WHITE_COLOR,
   },
   textButton: {

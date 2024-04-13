@@ -5,17 +5,18 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     justifyContent: "space-between",
-    height: 55,
     width: "100%",
     flexDirection: "row",
-    paddingHorizontal: 15,
+    paddingHorizontal: 25,
+    paddingVertical: 10,
     borderRadius: 5,
-
     backgroundColor: THEME.ITEM_CART_BACKGROUNDCOLOR,
   },
   title: {
     fontFamily: "poppins-regular",
-    fontSize: 15,
+    fontSize: 16,
+    letterSpacing: 1,
+    color: THEME.BLACK_TEXT_COLOR,
   },
   contentWrap: {
     flexDirection: "row",
@@ -23,6 +24,11 @@ const styles = StyleSheet.create({
   },
   iconCompleted: {
     marginRight: 15,
+  },
+  dateText: {
+    fontFamily: "poppins-regular",
+    fontSize: 12,
+    color: THEME.DATE_TEXT_COLOR,
   },
 });
 
