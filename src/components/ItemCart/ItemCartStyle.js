@@ -10,7 +10,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     paddingHorizontal: 15,
     borderRadius: 5,
-
     backgroundColor: THEME.ITEM_CART_BACKGROUNDCOLOR,
   },
   title: {

@@ -9,8 +9,8 @@ import { PersistGate } from "redux-persist/integration/react";
 import RootNavigation from "./src/navigation/RootNavigation";
 import store, { persistor } from "./src/store";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import HomePageScreen from "./src/screens/HomePageScreen";
-import NewItemScreen from "./src/screens/NewItemScreen";
+import AboutItemScreen from "./src/screens/AboutItemScreen";
+
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
@@ -36,9 +36,8 @@ export default function App() {
         <StatusBar style="light" />
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
-            {/* <NewItemScreen /> */}
-            {/* <HomePageScreen /> */}
-            <RootNavigation />
+            <AboutItemScreen />
+            {/* <RootNavigation /> */}
           </PersistGate>
         </Provider>
       </View>

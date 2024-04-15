@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import styles from "./ItemCartStyle";
+import { THEME } from "../../theme";
 
 const ItemCart = ({ item, onPress, onLongPress }) => {
   const { title, completed } = item;
@@ -13,11 +14,15 @@ const ItemCart = ({ item, onPress, onLongPress }) => {
       style={styles.container}
     >
       <View style={styles.contentWrap}>
-        {completed ? (
+        {completed && (
           <View style={styles.iconCompleted}>
-            <FontAwesome name="check-circle" size={24} color="#3EDA73" />
+            <FontAwesome
+              name="check-circle"
+              size={24}
+              color={THEME.ITEM_DONE_COLOR}
+            />
           </View>
-        ) : null}
+        )}
         <Text style={styles.title}>{title}</Text>
       </View>
       <Entypo name="chevron-right" size={25} color="#0EA5E9" />

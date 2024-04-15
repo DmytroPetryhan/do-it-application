@@ -82,7 +82,7 @@ const NewItemScreen = (props) => {
         multiline={true}
         placeholder="Description"
         iconName="align-left"
-        maxLength={200}
+        maxLength={300}
         onChangeText={setDescription}
         style={{ height: 200 }}
         editable={showTime === false && showDate === false}
