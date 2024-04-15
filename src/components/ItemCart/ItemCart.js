@@ -14,7 +14,7 @@ const ItemCart = ({ item, onPress, onLongPress }) => {
       style={styles.container}
     >
       <View style={styles.contentWrap}>
-        {completed && (
+        {completed ? (
           <View style={styles.iconCompleted}>
             <FontAwesome
               name="check-circle"
@@ -22,7 +22,7 @@ const ItemCart = ({ item, onPress, onLongPress }) => {
               color={THEME.ITEM_DONE_COLOR}
             />
           </View>
-        )}
+        ) : null}
         <Text style={styles.title}>{title}</Text>
       </View>
       <Entypo name="chevron-right" size={25} color="#0EA5E9" />

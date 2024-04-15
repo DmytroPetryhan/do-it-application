@@ -36,8 +36,7 @@ export default function App() {
         <StatusBar style="light" />
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
-            <AboutItemScreen />
-            {/* <RootNavigation /> */}
+            <RootNavigation />
           </PersistGate>
         </Provider>
       </View>
