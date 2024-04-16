@@ -16,7 +16,7 @@ import {
   BottomSheetView,
 } from "@gorhom/bottom-sheet";
 
-const TaskPageScreen = () => {
+const TaskPageScreen = ({ navigation }) => {
   const allItemsList = useSelector(userItems);
   const bottomSheetModalRef = useRef(null);
   const [items, setItems] = useState([]);
@@ -44,6 +44,9 @@ const TaskPageScreen = () => {
   if (visiableModal) bottomSheetModalRef.current?.present();
   const closeModal = () => bottomSheetModalRef.current?.dismiss();
 
+  const navigationHandler = (data) => () => {
+    navigation.navigate("tasksItemDetail", data);
+  };
   return (
     <BottomSheetModalProvider>
       <SafeAreaView style={styles.safeArea}>
@@ -65,7 +68,11 @@ const TaskPageScreen = () => {
             <Select items={allItemsList} onSelect={setItems} />
           </View>
 
-          <List title={"Task List"} list={filteredList} />
+          <List
+            title={"Task List"}
+            list={filteredList}
+            onPress={navigationHandler}
+          />
           <CommonButton
             style={styles.addButton}
             onPress={handlePresentModal(true)}
