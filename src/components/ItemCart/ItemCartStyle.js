@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     width: "100%",
     flexDirection: "row",
-    paddingHorizontal: 25,
+    paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 5,
     backgroundColor: THEME.ITEM_CART_BACKGROUNDCOLOR,

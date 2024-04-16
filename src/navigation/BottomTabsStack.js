@@ -1,7 +1,5 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
-import HomePageScreen from "../screens/HomePageScreen";
-import TaskPageScreen from "../screens/TasksPageScreen";
 import GradientContainer from "../components/GradientContainer";
 import SettingsScreen from "../screens/SettingsScreen";
 import AboutItemScreen from "../screens/AboutItemScreen";
@@ -10,6 +8,8 @@ import { THEME } from "../theme";
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { useTheme } from "react-native-paper";
+import HomeStack from "./HomeStack";
+import TasksStack from "./TasksStack";
 
 const BottomNavigator =
   Platform.OS === "ios"
@@ -48,7 +48,7 @@ function BottomTabsStack() {
       <BottomNavigator.Navigator
         style={{ marginBottom: 0 }}
         {...getNavigationOptions()}
-        initialRouteName="Home"
+        initialRouteName="homeScreenStack"
       >
         <BottomNavigator.Screen
           options={{
@@ -58,8 +58,8 @@ function BottomTabsStack() {
               <Ionicons name="home" size={24} color={color} />
             ),
           }}
-          name="homeScreen"
-          component={HomePageScreen}
+          name="homeScreenStack"
+          component={HomeStack}
         />
 
         <BottomNavigator.Screen
@@ -69,8 +69,8 @@ function BottomTabsStack() {
               <FontAwesome5 name="tasks" size={24} color={color} />
             ),
           }}
-          name="taskScreen"
-          component={TaskPageScreen}
+          name="taskScreenStack"
+          component={TasksStack}
         />
         <BottomNavigator.Screen
           options={{

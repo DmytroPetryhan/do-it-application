@@ -5,16 +5,12 @@ import { FontAwesome } from "@expo/vector-icons";
 import styles from "./ItemCartStyle";
 import { THEME } from "../../theme";
 
-const ItemCart = ({ item, onPress, onLongPress }) => {
+const ItemCart = ({ item, onPress }) => {
   const { title, completed, date, time } = item;
   return (
-    <TouchableOpacity
-      onPress={onPress}
-      onLongPress={onLongPress}
-      style={styles.container}
-    >
+    <TouchableOpacity onPress={onPress(item)} style={styles.container}>
       <View style={styles.contentWrap}>
-        {completed ? (
+        {completed && (
           <View style={styles.iconCompleted}>
             <FontAwesome
               name="check-circle"
@@ -22,7 +18,7 @@ const ItemCart = ({ item, onPress, onLongPress }) => {
               color={THEME.ITEM_DONE_COLOR}
             />
           </View>
-        ) : null}
+        )}
         <View>
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.dateText}>{`${date}  |  ${time}`}</Text>

@@ -3,7 +3,7 @@ import { View, Text, FlatList } from "react-native";
 import styles from "./ListStyles";
 import ItemCart from "../ItemCart/ItemCart";
 
-const List = ({ title, list }) => {
+const List = ({ title, list, onPress }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{title}</Text>
@@ -12,7 +12,7 @@ const List = ({ title, list }) => {
         data={list}
         keyExtractor={(item) => item.id.toString()}
         contentContainerStyle={{ rowGap: 17 }}
-        renderItem={({ item }) => <ItemCart item={item} />}
+        renderItem={({ item }) => <ItemCart item={item} onPress={onPress} />}
       />
     </View>
   );

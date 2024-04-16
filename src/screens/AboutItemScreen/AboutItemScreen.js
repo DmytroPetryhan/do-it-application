@@ -1,21 +1,28 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, Pressable, Keyboard } from "react-native";
+import { View, TextInput, Pressable, Keyboard } from "react-native";
 import GradientContainer from "../../components/GradientContainer";
 import styles from "./AboutItemScreenStyles";
 import ActionButton from "../../components/ActionButton";
 import HorisontaLine from "../../components/HorisontalLine";
 import { THEME } from "../../theme";
-import HeaderItem from "../../components/HeaderItem/HeaderItem";
+import HeaderItem from "../../components/HeaderItem";
+import BackButton from "../../components/BackButton";
 
-const AboutItemScreen = (item) => {
-  const { title, description, date, time } = item;
-
+const AboutItemScreen = ({ navigation, route }) => {
+  const { title, description, date, time } = route.params;
   const [descriptionText, setDescriptionText] = useState(description);
+
   const hideKeyboard = () => Keyboard.dismiss();
 
+  const backNavigation = () => navigation.goBack();
+
   return (
-    <GradientContainer>
-      <Pressable style={styles.container} onPress={hideKeyboard}>
+    <GradientContainer style={styles.container}>
+      <View style={styles.backButtonWrap}>
+        <BackButton onPress={backNavigation} />
+      </View>
+
+      <Pressable style={styles.contentWrap} onPress={hideKeyboard}>
         <HeaderItem title={title} date={date} time={time} />
         <HorisontaLine style={styles.line} />
         <TextInput
@@ -40,7 +47,7 @@ const AboutItemScreen = (item) => {
           <ActionButton
             title="Save"
             iconName="save"
-            iconColor={THEME.ITEM_DONE_COLOR}
+            iconColor={THEME.WHITE_COLOR}
           />
         </View>
       </Pressable>
