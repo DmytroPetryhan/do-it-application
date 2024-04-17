@@ -100,3 +100,49 @@ export const fetchUser = async (id) => {
     };
   }
 };
+
+export const deleteItem = async (userId, itemId) => {
+  try {
+    const request = api.delete(`${userId}/items/${itemId}.json`);
+    return {
+      status: (await request).status,
+    };
+  } catch (error) {
+    return {
+      status: (await request).status,
+      errorMessade: error,
+    };
+  }
+};
+
+export const toggleItemIsDone = async (userId, itemId, completed) => {
+  try {
+    const request = api.patch(`${userId}/items/${itemId}.json`, {
+      completed: completed,
+    });
+    return {
+      status: (await request).status,
+    };
+  } catch (error) {
+    return {
+      status: (await request).status,
+      errorMessade: error,
+    };
+  }
+};
+
+export const changeItemDescription = async (userId, itemId, descripton) => {
+  try {
+    const request = api.patch(`${userId}/items/${itemId}.json`, {
+      descripton: descripton,
+    });
+    return {
+      status: (await request).status,
+    };
+  } catch (error) {
+    return {
+      status: (await request).status,
+      errorMessade: error,
+    };
+  }
+};

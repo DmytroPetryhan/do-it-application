@@ -4,9 +4,9 @@ import styles from "./ActionButtonStyles";
 import { FontAwesome } from "react-native-vector-icons";
 
 const ActionButton = (props) => {
-  const { title, onPres, iconName, iconColor } = props;
+  const { title, onPress, iconName, iconColor, ...rest } = props;
   return (
-    <TouchableOpacity style={styles.container} onPress={onPres}>
+    <TouchableOpacity style={styles.container} onPress={onPress} {...rest}>
       <FontAwesome name={iconName} size={24} color={iconColor} />
       <Text style={styles.titleText}>{title}</Text>
     </TouchableOpacity>

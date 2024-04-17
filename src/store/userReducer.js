@@ -19,22 +19,34 @@ export const userReducer = {
   },
 
   removeItem: (state, actions) => {
-    return state;
+    const filteredList = state.items.filter(
+      (item) => item.id != actions.payload
+    );
+    return { ...state, items: filteredList };
   },
 
   changeItem: (state, actions) => {
+    state.items.forEach((item) => {
+      if (item.id === actions.payload.id) {
+        item.description = actions.payload.descriptionText;
+      }
+    });
     return state;
   },
 
   toggleIsDone: (state, actions) => {
-    return state;
+    state.items.forEach((item) => {
+      if (item.id === actions.payload) {
+        item.completed = !item.completed;
+      }
+    });
   },
 
   toggleIsOnboarded: (state, actions) => {
     return { ...state, isOnboarded: actions.payload };
   },
 
-  cleareStore: (state, actions) => {
+  cleareStore: () => {
     return {
       token: null,
       isOnboarded: false,
