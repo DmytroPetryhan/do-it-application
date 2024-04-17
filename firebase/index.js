@@ -146,3 +146,27 @@ export const changeItemDescription = async (userId, itemId, descripton) => {
     };
   }
 };
+
+export const deleteUser = async (userId) => {
+  try {
+    const request = api.delete(`${userId}.json`);
+    return {
+      status: (await request).status,
+    };
+  } catch (error) {
+    return {
+      status: (await request).status,
+      errorMessade: error,
+    };
+  }
+};
+
+export const findPassword = async (email) => {
+  const allUsers = await allUsersList();
+  const user = allUsers.find((u) => u.user.userEmail === email);
+  if (user != undefined) {
+    return user.user.userPassword;
+  } else {
+    return "No user found with this email";
+  }
+};

@@ -9,7 +9,7 @@ const BackButton = (props) => {
 
   return (
     <TouchableOpacity onPress={onPress} style={styles.container}>
-      <Icon name="angle-left" size={30} color={THEME.BACK_BUTTON_ARROW} />
+      <Icon name="angle-left" size={30} color={THEME.ARROW_BUTTON} />
       <Text style={styles.buttonTitle}>Back</Text>
     </TouchableOpacity>
   );
