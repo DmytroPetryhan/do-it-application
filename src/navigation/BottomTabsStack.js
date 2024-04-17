@@ -1,8 +1,6 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import GradientContainer from "../components/GradientContainer";
-import SettingsScreen from "../screens/SettingsScreen";
-import AboutItemScreen from "../screens/AboutItemScreen";
 import { Platform } from "react-native";
 import { THEME } from "../theme";
 import { Ionicons } from "@expo/vector-icons";
@@ -10,6 +8,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { useTheme } from "react-native-paper";
 import HomeStack from "./HomeStack";
 import TasksStack from "./TasksStack";
+import SettingsStack from "./SettingsStack";
 
 const BottomNavigator =
   Platform.OS === "ios"
@@ -74,17 +73,15 @@ function BottomTabsStack() {
         />
         <BottomNavigator.Screen
           options={{
-            headerTintColor: THEME.WHITE_TEXT_COLOR,
-            headerTitle: "Settings",
             title: "Settings",
-            headerShown: true,
+            headerShown: false,
             headerTitleStyle: { fontSize: 25, fontFamily: "poppins-regular" },
             tabBarIcon: ({ color }) => (
               <Ionicons name="settings-sharp" size={24} color={color} />
             ),
           }}
-          name="settingsScreen"
-          component={SettingsScreen}
+          name="settingsScreenStack"
+          component={SettingsStack}
         />
       </BottomNavigator.Navigator>
     </GradientContainer>

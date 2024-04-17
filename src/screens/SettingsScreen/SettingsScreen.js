@@ -10,57 +10,27 @@ import { Ionicons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
+import SettingsButton from "../../components/SettingsButton/SettingsButton";
 
-const SettingsScreen = () => {
+const SettingsScreen = ({ navigation }) => {
   const dispatch = useDispatch();
 
+  const navigateTo = (path) => () => navigation.navigate(path);
   const logoutHandler = () => dispatch(cleareStore());
 
   return (
     <View style={styles.container}>
       <View style={styles.textWrap}>
-        <View style={styles.secondContainer}>
-          <View style={styles.iconText}>
-            <Ionicons name="person-circle-outline" size={26} color="white" />
-            <Text style={styles.text}>Profile</Text>
-          </View>
-          <Feather name="chevron-right" size={26} color="white" />
-        </View>
-
-        <HorisontalLine />
-
-        <View style={styles.secondContainer}>
-          <View style={styles.iconText}>
-            <Entypo name="message" size={26} color="white" />
-            <Text style={styles.text}>Conversations</Text>
-          </View>
-          <Feather name="chevron-right" size={26} color="white" />
-        </View>
-
-        <HorisontalLine />
-
-        <View style={styles.secondContainer}>
-          <View style={styles.iconText}>
-            <Entypo name="light-bulb" size={26} color="white" />
-            <Text style={styles.text}>Projects</Text>
-          </View>
-          <Feather name="chevron-right" size={26} color="white" />
-        </View>
-
-        <HorisontalLine />
-        <View style={styles.secondContainer}>
-          <View style={styles.iconText}>
-            <MaterialCommunityIcons
-              name="text-box-search"
-              size={26}
-              color="white"
-            />
-            <Text style={styles.text}>Terms and Policies</Text>
-          </View>
-          <Feather name="chevron-right" size={26} color="white" />
-        </View>
-
-        <HorisontalLine />
+        <SettingsButton
+          title="Profile"
+          iconName="person-circle-outline"
+          onPress={navigateTo("profileScreen")}
+        />
+        <SettingsButton
+          title="About app"
+          iconName="information-circle-outline"
+          onPress={navigateTo("aboutApp")}
+        />
       </View>
 
       <LogoutButton onPress={logoutHandler} />

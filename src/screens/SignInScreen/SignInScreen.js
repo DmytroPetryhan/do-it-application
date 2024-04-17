@@ -24,6 +24,7 @@ import styles from "./SignInScreenStyles";
 import Button from "../../components/Button/Button";
 import GradientContainer from "../../components/GradientContainer";
 import PasswordInput from "../../components/PasswordInput/PasswordInput";
+import { findPassword } from "../../../firebase";
 
 const SignInScreen = ({ navigation }) => {
   const [userPassword, setUserPassword] = useState("");
@@ -31,7 +32,6 @@ const SignInScreen = ({ navigation }) => {
   const [errors, setErrors] = useState({});
   const [disableButton, setDisableButton] = useState(true);
   const dispatch = useDispatch();
-
   const hideKeyboard = () => Keyboard.dismiss();
   const { height } = useWindowDimensions();
 
@@ -68,15 +68,20 @@ const SignInScreen = ({ navigation }) => {
   };
 
   const remindPassword = () => {
-    Alert.alert("Forget password ?", "Please enter a new password !!!", [
+    Alert.prompt("Forget password ?", "Please enter your email !!!", [
       {
         text: "Cancel",
         style: "destructive",
       },
       {
         text: "OK",
-        onPress: () => {
-          alert(`Your password ...`);
+        onPress: async (txt) => {
+          if (txt.trim().length) {
+            const request = await findPassword(txt);
+            alert(request);
+          } else {
+            alert(`Invalid email...`);
+          }
         },
       },
     ]);

@@ -23,7 +23,7 @@ const ItemCart = ({ item, onPress }) => {
           <Text style={styles.dateText}>{`${date}  |  ${time}`}</Text>
         </View>
       </View>
-      <Entypo name="chevron-right" size={25} color="#0EA5E9" />
+      <Entypo name="chevron-right" size={25} color={THEME.ARROW_BUTTON} />
     </TouchableOpacity>
   );
 };
