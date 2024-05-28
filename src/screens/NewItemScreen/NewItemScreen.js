@@ -50,12 +50,17 @@ const NewItemScreen = (props) => {
       time,
       completed: false,
     };
-    const request = await addNewItem(item);
-    if (request.status === 200) {
-      dispatch(addItem({ ...item, id: request.itemId }));
+    try {
+      const request = await addNewItem(item);
+      if (request.status === 200) {
+        dispatch(addItem({ ...item, id: request.itemId }));
+      }
+      closeBottomSheetModal();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      dispatch(toggleLoader(false));
     }
-    closeBottomSheetModal();
-    dispatch(toggleLoader(false));
   };
 
   const isDisabled = () => {
