@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   View,
   Text,
@@ -11,8 +11,6 @@ import {
   Platform,
 } from "react-native";
 import { dataMessage } from "../../data/dataMessageScreen";
-import { useValidEmail } from "../SignUpScreen/useValidEmail";
-import { useValidPassword } from "../SignUpScreen/useValidPassword";
 import { THEME } from "../../theme";
 import { signInUser } from "../../../firebase";
 import { useDispatch } from "react-redux";
@@ -23,48 +21,48 @@ import NavigationButton from "../../components/NavigationButton";
 import styles from "./SignInScreenStyles";
 import Button from "../../components/Button/Button";
 import GradientContainer from "../../components/GradientContainer";
-import PasswordInput from "../../components/PasswordInput/PasswordInput";
+import { useForm } from "react-hook-form";
 import { findPassword } from "../../../firebase";
+import { emailRules } from "../../data/regularExpressions";
+import { passwordRules } from "../../data/regularExpressions";
 
 const SignInScreen = ({ navigation }) => {
-  const [userPassword, setUserPassword] = useState("");
-  const [userEmail, setUserEmail] = useState("");
-  const [errors, setErrors] = useState({});
-  const [disableButton, setDisableButton] = useState(true);
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      userEmail: "",
+      userPassword: "",
+    },
+  });
+
   const dispatch = useDispatch();
   const hideKeyboard = () => Keyboard.dismiss();
   const { height } = useWindowDimensions();
 
   const navigateHandler = (route) => () => navigation.navigate(route);
 
-  useEffect(() => {
-    const isValid = validationForm();
-    isValid ? setDisableButton(true) : setDisableButton(false);
-  }, [userPassword, userEmail]);
-
-  const validationForm = () => {
-    let errors = {};
-    if (!useValidEmail(userEmail)) errors.userEmail = "Incorret E-mail";
-    if (!useValidPassword(userPassword))
-      errors.userPassword = "Incorrect password";
-    setErrors(errors);
-
-    return Object.keys(errors).length !== 0;
-  };
-
-  const submitForm = async () => {
+  const submitForm = async ({ userEmail, userPassword }) => {
     dispatch(toggleLoader(true));
     const findUser = {
       userEmail,
       userPassword,
     };
-    const request = await signInUser(findUser);
-    if (request.status === 200) {
-      dispatch(addUser({ id: request.userId }));
-    } else {
-      alert(request.errorMessade);
+
+    try {
+      const request = await signInUser(findUser);
+      if (request.status === 200) {
+        dispatch(addUser({ id: request.userId }));
+      } else {
+        alert(request.errorMessade);
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      dispatch(toggleLoader(false));
     }
-    dispatch(toggleLoader(false));
   };
 
   const remindPassword = () => {
@@ -99,32 +97,36 @@ const SignInScreen = ({ navigation }) => {
             <WelcomeMessage text={dataMessage.WELCOME_BACK_MESSAGE} />
             <View style={styles.inputContainer}>
               <Input
-                value={userEmail}
-                title={"E - mail"}
-                image={"mail"}
-                errorMessage={errors.userEmail}
-                keyboardType={"email-address"}
-                onChangeText={setUserEmail}
+                name="userEmail"
+                placeholder="E - mail"
+                image="mail"
+                keyboardType="email-address"
+                control={control}
+                rules={emailRules}
               />
 
-              <PasswordInput
-                value={userPassword}
-                errorMessage={errors.userPassword}
-                onChangeText={setUserPassword}
+              <Input
+                name="userPassword"
+                placeholder="Password"
+                image="lock-closed"
+                keyboardType="default"
+                control={control}
+                secureTextEntry
+                rules={passwordRules}
               />
             </View>
             <View style={styles.forgetPassworButton}>
               <NavigationButton
                 style={styles.navigationButton}
-                title={"forget password?"}
+                title={"forgot password?"}
                 textColor={THEME.WHITE_TEXT_COLOR}
                 onPress={remindPassword}
               />
             </View>
             <Button
               title={"sign in"}
-              onPres={submitForm}
-              disabled={disableButton}
+              onPres={handleSubmit(submitForm)}
+              disabled={Object.keys(errors).length}
             />
 
             <View style={styles.signUp}>

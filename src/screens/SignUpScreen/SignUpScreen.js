@@ -9,11 +9,8 @@ import {
   useWindowDimensions,
   Alert,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { dataMessage } from "../../data/dataMessageScreen";
-import { useValidName } from "./useValidName";
-import { useValidEmail } from "./useValidEmail";
-import { useValidPassword } from "./useValidPassword";
 import { THEME } from "../../theme";
 import { signUpUser } from "../../../firebase";
 import { useDispatch } from "react-redux";
@@ -22,19 +19,28 @@ import WelcomeMessage from "../../components/WelcomeMessage";
 import Input from "../../components/Input";
 import NavigationButton from "../../components/NavigationButton";
 import Button from "../../components/Button/Button";
-import PasswordInput from "../../components/PasswordInput/PasswordInput";
 import styles from "./SignUpScreenStyles";
 import GradientContainer from "../../components/GradientContainer";
-import useSigUpScreenLogic from "./hooks/index";
+import { useForm } from "react-hook-form";
+import {
+  emailRules,
+  nameRules,
+  passwordRules,
+} from "../../data/regularExpressions";
 
 const SignUpScreen = ({ navigation }) => {
-  const [userName, setUserName] = useState("");
-  const [userPassword, setUserPassword] = useState("");
-  const [userEmail, setUserEmail] = useState("");
-  const [errors, setErrors] = useState({});
-  //const {} = useSigUpScreenLogic();
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      userName: "",
+      userEmail: "",
+      userPassword: "",
+    },
+  });
 
-  const [disableButton, setDisableButton] = useState(true);
   const dispatch = useDispatch();
 
   const hideKeyboard = () => Keyboard.dismiss();
@@ -42,36 +48,25 @@ const SignUpScreen = ({ navigation }) => {
 
   const navigateToSignIn = (route) => () => navigation.navigate(route);
 
-  useEffect(() => {
-    const isValid = validationForm();
-    isValid ? setDisableButton(true) : setDisableButton(false);
-  }, [userName, userPassword, userEmail]);
-
-  const validationForm = () => {
-    let errors = {};
-    if (!useValidName(userName.trim())) errors.userName = "Incorrect user name";
-    if (!useValidEmail(userEmail.trim())) errors.userEmail = "Incorrect E-mail";
-    if (!useValidPassword(userPassword.trim()))
-      errors.userPassword = "Incorrect password";
-    setErrors(errors);
-    return Object.keys(errors).length !== 0;
-  };
-
-  const submitForm = async () => {
+  const submitForm = async ({ userName, userEmail, userPassword }) => {
     dispatch(toggleLoader(true));
     const newUser = {
       userName,
       userEmail,
       userPassword,
     };
-
-    const request = await signUpUser(newUser);
-    if (request.status === 200) {
-      dispatch(addUser({ id: request.userId }));
-    } else {
-      alert(request.errorMessade);
+    try {
+      const request = await signUpUser(newUser);
+      if (request.status === 200) {
+        dispatch(addUser({ id: request.userId }));
+      } else {
+        alert(request.errorMessade);
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      dispatch(toggleLoader(false));
     }
-    dispatch(toggleLoader(false));
   };
   return (
     <GradientContainer>
@@ -85,33 +80,37 @@ const SignUpScreen = ({ navigation }) => {
             <WelcomeMessage text={dataMessage.WELCOME_MESSAGE} />
             <View style={styles.formContainer}>
               <Input
-                title={"Name"}
+                name="userName"
+                placeholder={"Name"}
                 image={"person-sharp"}
-                errorMessage={errors.userName}
                 keyboardType={"default"}
-                value={userName}
-                onChangeText={setUserName}
+                control={control}
+                rules={nameRules}
               />
 
               <Input
-                title={"E - mail"}
+                name="userEmail"
+                placeholder={"E - mail"}
                 image={"mail"}
-                errorMessage={errors.userEmail}
                 keyboardType={"email-address"}
-                value={userEmail}
-                onChangeText={setUserEmail}
+                control={control}
+                rules={emailRules}
               />
 
-              <PasswordInput
-                value={userPassword}
-                errorMessage={errors.userPassword}
-                onChangeText={setUserPassword}
+              <Input
+                name="userPassword"
+                placeholder="Password"
+                image="lock-closed"
+                keyboardType="default"
+                control={control}
+                secureTextEntry
+                rules={passwordRules}
               />
 
               <Button
-                disabled={disableButton}
+                disabled={Object.keys(errors).length}
                 title={"sign up"}
-                onPres={submitForm}
+                onPres={handleSubmit(submitForm)}
               />
             </View>
 

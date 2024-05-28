@@ -9,7 +9,6 @@ import { PersistGate } from "redux-persist/integration/react";
 import RootNavigation from "./src/navigation/RootNavigation";
 import store, { persistor } from "./src/store";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import AboutItemScreen from "./src/screens/AboutItemScreen";
 
 SplashScreen.preventAutoHideAsync();
 

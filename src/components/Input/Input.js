@@ -1,52 +1,75 @@
-import React, { useState, useCallback } from "react";
-import { View, TextInput } from "react-native";
+import React, { useState } from "react";
+import { View, TextInput, Pressable } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { THEME } from "../../theme";
-import { debounce } from "lodash";
-import styles from "./InputStyle";
 import ErrorMessage from "../ErrorMessage";
+import { Controller } from "react-hook-form";
+import styles from "./InputStyle";
 
 const Input = (props) => {
-  const [focus, setFocus] = useState(false);
   const {
-    title,
+    placeholder,
     image,
-    onChangeText,
     keyboardType,
-    value,
-    errorMessage,
-    ...rest
+    secureTextEntry,
+    rules = {},
+    name,
+    control,
   } = props;
+  const [secureText, setSecureText] = useState(secureTextEntry);
 
-  const activeBorderColor =
-    focus && errorMessage && value ? THEME.WARNING_RED_COLOR : "transparent";
-
-  const debounceHandler = useCallback(
-    debounce((text) => onChangeText(text), 500)
-  );
+  const visiblePAsswordHandler = (isVisible) => () => setSecureText(isVisible);
 
   return (
-    <View>
-      <View style={[styles.container, { borderColor: activeBorderColor }]}>
-        <Ionicons name={image} size={26} color={"black"} />
-        <TextInput
-          autoCaptialize={"none"}
-          keyboardType={keyboardType}
-          onChangeText={debounceHandler}
-          placeholder={title}
-          autoCorrect={false}
-          onFocus={() => {
-            setFocus(true);
-          }}
-          onBlur={() => setFocus(false)}
-          returnKeyType={"done"}
-          style={styles.input}
-          {...rest}
-        />
-      </View>
-      {focus && value ? <ErrorMessage message={errorMessage} /> : null}
-    </View>
+    <Controller
+      control={control}
+      render={({
+        field: { onChange, onBlur, value },
+        fieldState: { error },
+      }) => (
+        <View>
+          <View
+            style={[
+              styles.container,
+              { borderColor: error ? THEME.WARNING_RED_COLOR : "transparent" },
+            ]}
+          >
+            <Ionicons name={image} size={26} color={"black"} />
+            <TextInput
+              autoCaptialize={"none"}
+              secureTextEntry={secureText}
+              keyboardType={keyboardType}
+              onChangeText={onChange}
+              placeholder={placeholder}
+              autoCorrect={false}
+              value={value}
+              onBlur={onBlur}
+              returnKeyType={"done"}
+              style={styles.input}
+            />
+            {secureTextEntry && (
+              <Pressable
+                onPressIn={visiblePAsswordHandler(false)}
+                onPressOut={visiblePAsswordHandler(true)}
+              >
+                <Ionicons
+                  name={secureText ? "eye-off" : "eye"}
+                  size={26}
+                  color={"black"}
+                />
+              </Pressable>
+            )}
+          </View>
+          {error && <ErrorMessage message={error.message} />}
+        </View>
+      )}
+      name={name}
+      rules={rules}
+    />
   );
 };
 
 export default Input;
+
+{
+}

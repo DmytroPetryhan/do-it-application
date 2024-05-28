@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     marginTop: 5,
   },
   textStyle: {
-    fontSize: 16,
+    fontSize: 12,
     fontFamily: "poppins-regular",
     color: THEME.WARNING_RED_COLOR,
   },

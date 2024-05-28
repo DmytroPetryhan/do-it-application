@@ -24,7 +24,8 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     marginTop: 40,
-    height: 150,
+    marginBottom: 10,
+    height: 140,
     justifyContent: "space-between",
   },
   forgetPassworButton: {
