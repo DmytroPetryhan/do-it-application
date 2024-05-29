@@ -1,3 +1,1 @@
-import NewItemScreen from "./NewItemScreen";
-
-export default NewItemScreen;
+export { default } from "./NewItemScreen";

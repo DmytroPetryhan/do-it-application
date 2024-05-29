@@ -1,3 +1,1 @@
-import AboutItemScreen from "./AboutItemScreen";
-
-export default AboutItemScreen;
+export { default } from "./AboutItemScreen";

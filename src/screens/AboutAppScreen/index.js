@@ -1,3 +1,1 @@
-import AboutAppScreen from "./AboutAppScreen";
-
-export default AboutAppScreen;
+export { default } from "./AboutAppScreen";

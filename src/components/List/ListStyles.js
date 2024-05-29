@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   title: {
-    marginVertical: 25,
+    marginVertical: 15,
     fontSize: 14,
     fontFamily: "poppins-regular",
     color: THEME.WHITE_TEXT_COLOR,

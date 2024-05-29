@@ -1,3 +1,1 @@
-import GradientContainer from "./GradientContainer";
-
-export default GradientContainer;
+export { default } from "./GradientContainer";

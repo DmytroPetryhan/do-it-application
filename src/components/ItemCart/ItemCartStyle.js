@@ -8,8 +8,7 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
     paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderRadius: 5,
+    paddingVertical: 8,
     backgroundColor: THEME.ITEM_CART_BACKGROUNDCOLOR,
   },
   title: {
@@ -29,6 +28,10 @@ const styles = StyleSheet.create({
     fontFamily: "poppins-regular",
     fontSize: 12,
     color: THEME.DATE_TEXT_COLOR,
+  },
+  containerStyle: {
+    borderRadius: 5,
+    backgroundColor: THEME.DELETE_ITEM_BUTTON_COLOR,
   },
 });
 

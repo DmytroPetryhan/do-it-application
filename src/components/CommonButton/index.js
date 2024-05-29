@@ -1,3 +1,1 @@
-import CommonButton from "./CommonButton";
-
-export default CommonButton;
+export { default } from "./CommonButton";

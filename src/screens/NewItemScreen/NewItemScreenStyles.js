@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   buttonWrap: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: Platform.OS === "ios" ? 20 : 0,
+    marginBottom: Platform.OS === "ios" ? 30 : 0,
   },
 });
 

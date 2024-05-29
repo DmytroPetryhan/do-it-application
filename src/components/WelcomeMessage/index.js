@@ -1,3 +1,1 @@
-import WelcomeMessage from "./WelcomeMessage";
-
-export default WelcomeMessage;
+export { default } from "./WelcomeMessage";

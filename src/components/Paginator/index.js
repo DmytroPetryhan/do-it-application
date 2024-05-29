@@ -1,3 +1,1 @@
-import Paginator from "./Paginator";
-
-export default Paginator;
+export { default } from "./Paginator";

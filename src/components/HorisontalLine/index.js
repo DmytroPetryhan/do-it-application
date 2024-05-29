@@ -1,3 +1,1 @@
-import HorisontalLine from "./HorisontalLine";
-
-export default HorisontalLine;
+export { default } from "./HorisontalLine";

@@ -1,3 +1,1 @@
-import DateTimeSelect from "./DateTimeSelect";
-
-export default DateTimeSelect;
+export { default } from "./DateTimeSelect";
