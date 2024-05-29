@@ -1,3 +1,1 @@
-import TaskPageScreen from "./TaskPageScreen";
-
-export default TaskPageScreen;
+export { default } from "./TaskPageScreen";

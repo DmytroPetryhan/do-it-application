@@ -1,2 +1,1 @@
-import OnboardingCarusel from "./OnboardingCarusel";
-export default OnboardingCarusel;
+export { default } from "./OnboardingCarusel";

@@ -30,4 +30,5 @@ export const {
   toggleIsOnboarded,
   cleareStore,
   toggleLoader,
+  toggleSwiped,
 } = userSlice.actions;

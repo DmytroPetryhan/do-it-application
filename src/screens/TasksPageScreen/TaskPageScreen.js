@@ -44,7 +44,7 @@ const TaskPageScreen = ({ navigation }) => {
   if (visiableModal) bottomSheetModalRef.current?.present();
   const closeModal = () => bottomSheetModalRef.current?.dismiss();
 
-  const navigationHandler = (data) => () => {
+  const navigationHandler = (data) => {
     navigation.navigate("tasksItemDetail", data);
   };
   return (
@@ -71,7 +71,7 @@ const TaskPageScreen = ({ navigation }) => {
           <List
             title={"Task List"}
             list={filteredList}
-            onPress={navigationHandler}
+            navigationHandler={navigationHandler}
           />
           <CommonButton
             style={styles.addButton}

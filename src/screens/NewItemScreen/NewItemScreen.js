@@ -84,7 +84,7 @@ const NewItemScreen = (props) => {
         editable={showTime === false && showDate === false}
       />
       <Input
-        multiline={true}
+        multiline
         placeholder="Description"
         iconName="align-left"
         maxLength={300}

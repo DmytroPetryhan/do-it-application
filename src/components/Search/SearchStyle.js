@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   input: {
     color: THEME.WHITE_COLOR,
     opacity: 0.6,
-    fontSize: 16,
+    fontSize: 12,
     fontFamily: "poppins-regular",
     includeFontPadding: false,
   },

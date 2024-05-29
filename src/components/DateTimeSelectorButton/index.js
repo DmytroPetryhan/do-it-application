@@ -1,3 +1,1 @@
-import DateTimeSelectorButton from "./DateTimeSelectorButton";
-
-export default DateTimeSelectorButton;
+export { default } from "./DateTimeSelectorButton";

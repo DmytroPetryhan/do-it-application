@@ -1,3 +1,1 @@
-import TitleAppScreen from "./TitleAppScreen";
-
-export default TitleAppScreen;
+export { default } from "./TitleAppScreen";

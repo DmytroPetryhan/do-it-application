@@ -1,3 +1,1 @@
-import ItemCart from "./ItemCart";
-
-export default ItemCart;
+export { default } from "./ItemCart";

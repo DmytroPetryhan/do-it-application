@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { View, TextInput, Pressable, Keyboard, Alert } from "react-native";
+import {
+  View,
+  TextInput,
+  Pressable,
+  Keyboard,
+  Alert,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
 import GradientContainer from "../../components/GradientContainer";
 import styles from "./AboutItemScreenStyles";
 import ActionButton from "../../components/ActionButton";
@@ -42,38 +50,56 @@ const AboutItemScreen = ({ navigation, route }) => {
   const setItemDone = async () => {
     dispatch(toggleLoader(true));
 
-    const request = await toggleItemIsDone(userId, id, !completed);
+    try {
+      const request = await toggleItemIsDone(userId, id, !completed);
 
-    if (request.status === 200) {
-      dispatch(toggleIsDone(id));
-      navigation.goBack();
-    } else {
-      alert(request.errorMessade);
+      if (request.status === 200) {
+        dispatch(toggleIsDone(id));
+        navigation.goBack();
+      } else {
+        alert(request.errorMessade);
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      dispatch(toggleLoader(false));
     }
-    dispatch(toggleLoader(false));
   };
+
   const deleteUserItem = async () => {
     dispatch(toggleLoader(true));
-    const request = await deleteItem(userId, id);
-    if (request.status === 200) {
-      dispatch(removeItem(id));
-      navigation.goBack();
-    } else {
-      alert(request.errorMessade);
+
+    try {
+      const request = await deleteItem(userId, id);
+      if (request.status === 200) {
+        dispatch(removeItem(id));
+        navigation.goBack();
+      } else {
+        alert(request.errorMessade);
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      dispatch(toggleLoader(false));
     }
-    dispatch(toggleLoader(false));
   };
 
   const changeUserItem = async () => {
     dispatch(toggleLoader(true));
-    const request = await changeItemDescription(userId, id, descriptionText);
-    if (request.status === 200) {
-      dispatch(changeItem({ id, descriptionText }));
-      navigation.goBack();
-    } else {
-      alert(request.errorMessade);
+
+    try {
+      const request = await changeItemDescription(userId, id, descriptionText);
+      if (request.status === 200) {
+        dispatch(changeItem({ id, descriptionText }));
+        navigation.goBack();
+      } else {
+        alert(request.errorMessade);
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      dispatch(toggleLoader(false));
     }
-    dispatch(toggleLoader(false));
   };
 
   const disabledButton = () => {
@@ -81,44 +107,49 @@ const AboutItemScreen = ({ navigation, route }) => {
   };
 
   return (
-    <GradientContainer style={styles.container}>
-      <View style={styles.backButtonWrap}>
-        <BackButton onPress={backNavigation} />
-      </View>
-
-      <Pressable style={styles.contentWrap} onPress={hideKeyboard}>
-        <HeaderItem title={title} date={date} time={time} />
-        <HorisontaLine style={styles.line} />
-        <TextInput
-          style={styles.textIn}
-          value={descriptionText}
-          multiline={true}
-          onChangeText={setDescriptionText}
-          maxLength={300}
-        />
-
-        <View style={styles.buttonWrap}>
-          <ActionButton
-            title="Done"
-            iconName="check-circle"
-            iconColor={THEME.ITEM_DONE_COLOR}
-            onPress={setItemDone}
-          />
-          <ActionButton
-            title="Delete"
-            iconName="trash"
-            iconColor={THEME.DELETE_ITEM_BUTTON_COLOR}
-            onPress={deleteUserItem}
-          />
-          <ActionButton
-            title="Save"
-            iconName="save"
-            iconColor={THEME.WHITE_COLOR}
-            onPress={changeUserItem}
-            disabled={disabledButton()}
-          />
+    <GradientContainer>
+      <KeyboardAvoidingView
+        style={styles.container}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+      >
+        <View style={styles.backButtonWrap}>
+          <BackButton onPress={backNavigation} />
         </View>
-      </Pressable>
+
+        <Pressable style={styles.contentWrap} onPress={hideKeyboard}>
+          <HeaderItem title={title} date={date} time={time} />
+          <HorisontaLine style={styles.line} />
+          <TextInput
+            style={styles.textIn}
+            value={descriptionText}
+            multiline={true}
+            onChangeText={setDescriptionText}
+            maxLength={300}
+          />
+
+          <View style={styles.buttonWrap}>
+            <ActionButton
+              title="Done"
+              iconName="check-circle"
+              iconColor={THEME.ITEM_DONE_COLOR}
+              onPress={setItemDone}
+            />
+            <ActionButton
+              title="Delete"
+              iconName="trash"
+              iconColor={THEME.DELETE_ITEM_BUTTON_COLOR}
+              onPress={deleteUserItem}
+            />
+            <ActionButton
+              title="Save"
+              iconName="save"
+              iconColor={THEME.WHITE_COLOR}
+              onPress={changeUserItem}
+              disabled={disabledButton()}
+            />
+          </View>
+        </Pressable>
+      </KeyboardAvoidingView>
     </GradientContainer>
   );
 };

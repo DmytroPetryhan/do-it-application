@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import { View, SafeAreaView } from "react-native";
 import styles from "./HomePageScreenStyles";
 import {
@@ -19,16 +19,20 @@ const HomePageScreen = ({ navigation }) => {
   const userId = useSelector(userToken);
 
   const loadUser = useCallback(async () => {
-    const requestData = await fetchUser(userId);
+    try {
+      const requestData = await fetchUser(userId);
 
-    if (requestData.status === 200) {
-      const itemList = Object.keys(requestData.items).map((key) => ({
-        ...requestData.items[key],
-        id: key,
-      }));
-      dispatch(signUpUser({ user: requestData.user, items: itemList }));
-    } else {
-      dispatch(signUpUser({ user: {}, items: [] }));
+      if (requestData.status === 200) {
+        const itemList = Object.keys(requestData.items).map((key) => ({
+          ...requestData.items[key],
+          id: key,
+        }));
+        dispatch(signUpUser({ user: requestData.user, items: itemList }));
+      } else {
+        dispatch(signUpUser({ user: {}, items: [] }));
+      }
+    } catch (error) {
+      console.error(error);
     }
   }, []);
 
@@ -42,7 +46,7 @@ const HomePageScreen = ({ navigation }) => {
   const completedItems =
     allItems.filter((item) => item.completed === true) || [];
 
-  const navigationHandler = (data) => () => {
+  const navigationHandler = (data) => {
     navigation.navigate("itemDetail", data);
   };
   return (
@@ -53,14 +57,14 @@ const HomePageScreen = ({ navigation }) => {
           <List
             title="Incomplate Tasks"
             list={incompletedItems}
-            onPress={navigationHandler}
+            navigationHandler={navigationHandler}
           />
         ) : null}
         {completedItems.length ? (
           <List
             title="Complate Tasks"
             list={completedItems}
-            onPress={navigationHandler}
+            navigationHandler={navigationHandler}
           />
         ) : null}
       </View>

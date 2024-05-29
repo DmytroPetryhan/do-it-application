@@ -59,4 +59,13 @@ export const userReducer = {
   toggleLoader: (state, actions) => {
     return { ...state, loader: actions.payload };
   },
+  toggleSwiped: (state, actions) => {
+    state.items = state.items.map((item) => {
+      if (item.id === actions.payload) {
+        return { ...item, swiped: true };
+      } else {
+        return { ...item, swiped: false };
+      }
+    });
+  },
 };

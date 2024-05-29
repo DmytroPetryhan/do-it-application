@@ -1,3 +1,1 @@
-import HomePageScreen from "./HomePageScreen";
-
-export default HomePageScreen;
+export { default } from "./HomePageScreen";
