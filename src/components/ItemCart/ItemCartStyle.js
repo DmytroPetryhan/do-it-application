@@ -33,6 +33,10 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: THEME.DELETE_ITEM_BUTTON_COLOR,
   },
+  animatedContainer: {
+    justifyContent: "center",
+    overflow: "hidden",
+  },
 });
 
 export default styles;

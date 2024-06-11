@@ -11,11 +11,7 @@ const Loader = () => {
 
   return (
     <View style={styles.container}>
-      <ActivityIndicator
-        style={styles.indicator}
-        size="large"
-        color={THEME.LOADER}
-      />
+      <ActivityIndicator size="large" color={THEME.LOADER} />
     </View>
   );
 };

@@ -15,12 +15,13 @@ const List = ({ title, list, navigationHandler }) => {
 
   if (!isFocused) return;
 
-  const deleteUserItem = (id) => async () => {
+  const deleteUserItem = async (id) => {
     dispatch(toggleLoader(true));
     try {
       const request = await deleteItem(userId, id);
       if (request.status === 200) {
-        dispatch(removeItem(id));
+        dispatch(toggleLoader(false));
+        return (id) => dispatch(removeItem(id));
       } else {
         alert(request.errorMessade);
       }
@@ -38,12 +39,11 @@ const List = ({ title, list, navigationHandler }) => {
         showsVerticalScrollIndicator={false}
         data={list}
         keyExtractor={(item) => item.id.toString()}
-        contentContainerStyle={{ rowGap: 17 }}
         renderItem={({ item }) => (
           <ItemCart
             item={item}
             navigationHandler={navigationHandler}
-            onPress={deleteUserItem}
+            deleteUserItem={deleteUserItem}
           />
         )}
       />
